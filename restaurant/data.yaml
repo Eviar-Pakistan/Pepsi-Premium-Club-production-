@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 57
+names: ['7up_1500ml', '7up_1litre', '7up_250ml', '7up_320ml', '7up_500ml', '7up_can_250ml', '7up_white_can_320ml', '7up_zero_1litre', '7up_zero_320ml', '7up_zero_500ml', 'aquafina_1500ml', 'aquafina_500ml', 'boss_180ml', 'gatorade_blue', 'gatorade_red', 'gatorade_yellow_500ml', 'mirinda_1500ml', 'mirinda_1litre', 'mirinda_345ml', 'mirinda_500ml', 'mirinda_cam_c1_5l', 'mirinda_cam_c390ml', 'mirinda_can_320ml', 'mirinda_red_320ml', 'mirinda_red_c390ml', 'mirinda_soda_green_320ml', 'mirinda_soda_green_c1_5l', 'mirinda_soda_green_c390ml', 'mirinda_viet_purple_320ml', 'mirinda_viet_purple_c390ml', 'mountain_dew_1500ml', 'mountain_dew_1litre', 'mountain_dew_250ml', 'mountain_dew_345ml', 'mountain_dew_500ml', 'mountain_dew_can', 'pepsi_1500ml', 'pepsi_1litre', 'pepsi_250ml', 'pepsi_320ml', 'pepsi_500ml', 'pepsi_can_250ml', 'pepsi_can_500ml', 'pepsi_zero_1500ml', 'pepsi_zero_1litre', 'pepsi_zero_320ml', 'pepsi_zero_500ml', 'pepsi_zero_can_250ml', 'pepsi_zero_can_320ml', 'sting_can_red_320ml', 'sting_red_320ml', 'sting_red_500ml', 'sting_red_c330ml', 'sting_yellow_320ml', 'sting_yellow_500ml', 'sting_yellow_c330ml', 'sting_yellow_can_320ml']
+
+roboflow:
+  workspace: pepsico-kop9t
+  project: pepsico-products-hwlgh-ggfnj
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/pepsico-kop9t/pepsico-products-hwlgh-ggfnj/dataset/1

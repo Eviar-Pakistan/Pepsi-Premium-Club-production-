@@ -1,0 +1,324 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pepsi Receipt Scanner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<style>
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+
+  }
+
+  .spinner {
+    width: 80px;
+    height: 80px;
+    border: 10px solid transparent;
+    border-top-color: #C6A75F;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  /* Animations */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes slideToCenter {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slideToCenter {
+    animation: slideToCenter 0.1s ease-out forwards;
+  }
+
+  @font-face {
+    font-family: 'MyFont';
+    src: url('{% static 'consumer/fonts/PepsiOwners2-Regular220909.woff2' %}') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'MyFont';
+    src: url('{% static 'consumer/fonts/PepsiOwners2-Extended220909.woff2' %}') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  body {
+    font-family: 'MyFont', sans-serif;
+  }
+
+
+  /* Confetti effect */
+  .content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .swal-gradient-btn {
+    background: linear-gradient(140deg, rgba(163, 137, 77, 1) 0%, rgba(214, 187, 122, 1) 53%, rgba(163, 137, 77, 1) 100%);
+    color: white;
+    border: 2px solid #C6A75F;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .swal-gradient-btn:hover {
+    background: black;
+    color: #C6A75F;
+  }
+</style>
+
+<body class="bg-black flex items-center relative p-5 justify-center max-w-md min-h-screen font-sans  
+Tailwind CSS
+Plain CSS
+bg-gradient-to-b
+from-transparent
+via-transparent
+to-[#C6A75F]/40 ">
+
+  <!-- Screen 0: Intro -->
+  <div id="screen0" class="w-full max-w-md  text-center ">
+    {% csrf_token %}
+
+
+    <center>
+      <img src="{% static 'consumer/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class=" object-contain w-[200px]  " />
+    </center>
+
+
+
+    <h1 class="text-2xl  w-full  text-white font-bold mb-6 mt-4 " style="font-family: 'MyFont', sans-serif;">Welcome to
+      Pepsi Premium Club</h1>
+    <p class=" text-white  text-lg font-normal tracking-wide px-3">To participate, please scan your receipt of PepsiCo
+      products purchase.</p>
+    <button id="startScanningBtn" onclick="startScanning()"
+      class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] text-xl mt-10 font-extrabold px-6 mb-4 tracking-wide text-white w-fit  py-3 rounded-full shadow-md  transition hover:bg-none hover:bg-black  hover:text-[#C6A75F] hover:border-2 hover:border-[#C6A75F]"
+      style="font-family: 'MyFont', sans-serif;">
+      START SCANNING
+    </button>
+
+
+    <div class="infoBtn object-contain w-8 absolute  left-2 bottom-6">
+      <span class="text-white rounded-full font-bold" style="border:2px solid #fff;padding:5px 10px">Help</span>
+
+    </div>
+
+  </div>
+
+  <!-- Screen 1: Camera -->
+  <div id="screen1" class="w-full hidden  min-w-md text-center">
+    <div class="relative flex items-center w-full p-2 top-0">
+      <div class="absolute left-[-10px] top-1">
+        <img src="{% static 'consumer/assets/images/Premium.png' %}" alt="Pepsi Logo" class="object-contain w-16" />
+      </div>
+
+      <h1 class="mx-auto text-xl font-extrabold text-white" style="font-family: 'MyFont', sans-serif;">
+        SCAN RECEIPT
+      </h1>
+    </div>
+
+
+    <div class=" flex-col h-[510px] flex items-center justify-center mb-1 mt-[20%] bg-white relative  overflow-hidden">
+
+      <video id="cameraFeed" autoplay playsinline class="hidden w-full h-full object-cover "></video>
+      <p id="cameraText" class="text-[#C6A75F] font-semibold">Camera / Picture Area</p>
+      <canvas id="recieptImage" class="hidden"></canvas>
+      <img id="recieptcapturedImage" class="mt-4 mx-auto hidden w-full max-w-xs rounded-lg shadow-md" />
+
+
+    </div>
+    <div class="px-6">
+      <button id="takePictureBtn" onclick="takePicture()"
+        class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] text-xl mt-2 mb-6 font-extrabold px-6 tracking-wide text-white w-fit py-3 rounded-full shadow-md hover:bg-none hover:bg-black hover:text-[#C6A75F] hover:border-2 hover:border-[#C6A75F] transition"
+        style="font-family: 'MyFont', sans-serif;">
+        TAKE PICTURE
+      </button>
+    </div>
+
+    <div class="infoBtn object-contain w-8 absolute  left-2 bottom-4">
+      <span class="text-white rounded-full font-bold" style="border:2px solid #fff;padding:5px 10px">Help</span>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- Screen 2: Input Form -->
+  <div id="screen2" class=" w-full hidden max-w-md text-center ">
+
+    <center>
+      <img src="{% static 'consumer/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class=" object-contain w-[200px]  " />
+    </center>
+
+
+
+    <h1 class="text-3xl font-bold mb-4 mt-2  text-white" style="font-family: 'MyFont', sans-serif;">ENTER DETAILS</h1>
+    <p class=" text-white  text-xl font-normal tracking-wide px-3">Please fill out your details to proceed further.</p>
+    <div class="p-6">
+      <input type="text" id="nameInput" placeholder="Enter Name"
+        class="w-full border-2 border-white placeholder-gray-400 text-2xl text-gray-400  font-extrabold px-6 py-3 rounded-full mb-4 bg-white  focus:outline-none focus:ring-2 focus:ring-[#C6A75F]"
+        style="font-family: 'MyFont', sans-serif;">
+      <input type="number" id="numberInput" placeholder="Enter Number"
+        class="w-full border-2 border-white placeholder-gray-400 text-2xl text-gray-400  font-extrabold px-6 py-3 rounded-full mb-4 bg-white  focus:outline-none focus:ring-2 focus:ring-[#C6A75F]"
+        style="font-family: 'MyFont', sans-serif;">
+
+      <div class="mb-4">
+        <label for="checkbox1" class="inline-flex items-start text-md text-white">
+          <input type="checkbox" id="checkbox1" class="mr-2 mt-1">
+
+          <span class="text-start">I want to receive offers and information about Pepsico via SMS. If you do not wish to
+            hear from us please leave this box unticked.
+          </span>
+        </label>
+      </div>
+
+      <div class="mb-4">
+        <label for="checkbox2" class="inline-flex items-start text-md text-white">
+          <input type="checkbox" id="checkbox2" class="mr-2 mt-1">
+          <span class="text-start">
+            By creating an account, I confirm that I have read and agree to the
+            <a href="" class="underline">Terms & Conditions</a> and
+            <a class="underline" href="">Privacy Policy</a>
+            <span class="text-red-600 font-semibold">*</span>
+          </span>
+        </label>
+      </div>
+      <button id="submitButton"
+        class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] text-xl  font-extrabold px-6 mb-4 tracking-wide text-white w-full  py-3 rounded-full shadow-md hover:bg-none hover:bg-black hover:text-[#C6A75F] hover:border-2 hover:border-[#C6A75F] transition"
+        style="font-family: 'MyFont', sans-serif;">
+        SUBMIT
+      </button>
+    </div>
+
+    <div class="infoBtn object-contain w-8 absolute  left-2 bottom-4">
+      <span class="text-white rounded-full font-bold" style="border:2px solid #fff;padding:5px 10px">Help</span>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- Screen 3: Congratulations -->
+  <div id="screen3" class="hidden w-full max-w-md text-center ">
+    <center>
+      <img src="{% static 'consumer/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class=" object-contain w-[200px] mt-[-100px]" />
+    </center>
+
+
+    <h1 class="text-3xl font-extrabold text-white mt-10 mb-2" style="font-family: 'MyFont', sans-serif;">
+      Congratulations!</h1>
+    <p class=" text-white  text-xl font-normal tracking-wide px-3">Your entry has been submitted for the lucky draw!</p>
+    <div class="infoBtn object-contain w-8 absolute  left-2 bottom-4">
+      <span class="text-white rounded-full font-bold" style="border:2px solid #fff;padding:5px 10px">Help</span>
+
+    </div>
+
+  </div>
+
+  <!-- Screen 4 Loader Screen -->
+
+
+  <div id="loaderScreen" class="hidden w-full max-w-md  flex items-center justify-center text-center p-6">
+    <div class="content"></div>
+    <img src="{% static 'consumer/assets/images/Premium.png' %}" alt="Pepsi Logo"
+      class=" object-contain w-16 top-2 left-2 absolute  " />
+
+    <div class="loader spinner"></div>
+
+  </div>
+
+
+  <!-- Capturing Image -->
+  <canvas id="snapshotCanvas" class="hidden"></canvas>
+
+  <!-- Custom Prompt -->
+  <div id="customPrompt" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden">
+    <div class="bg-white text-black rounded-xl shadow-lg p-6 w-[90%] max-w-md text-center animate-slideToCenter">
+      <p id="promptMessage" class="text-3xl font-extrabold mb-4" style="font-family: 'MyFont', sans-serif;"></p>
+      <button onclick="closePrompt(2)"
+        class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] text-xl mt-4 font-extrabold px-6 tracking-wide text-white w-full  py-3 rounded-full shadow-md hover:bg-black hover:text-[#C6A75F] hover:border-2 hover:bg-none hover:border-[#C6A75F] transition"
+        style="font-family: 'MyFont', sans-serif;">
+        OK
+      </button>
+    </div>
+  </div>
+
+  <!-- Custom Alert -->
+
+  <div id="customAlert" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden">
+    <div class="bg-white text-black rounded-xl shadow-lg p-6 w-[90%] max-w-md text-center animate-slideToCenter">
+      <p id="alertMessage" class="text-3xl font-extrabold mb-4" style="font-family: 'MyFont', sans-serif;"></p>
+      <button onclick="closeAlert()"
+        class="bg-[#C6A75F] text-xl mt-4 font-extrabold px-6 tracking-wide text-white w-full  py-3 rounded-full shadow-md hover:bg-white hover:bg-black hover:text-[#C6A75F] hover:border-2 hover:border-[#C6A75F] transition"
+        style="font-family: 'MyFont', sans-serif;">
+        OK
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Info Box -->
+  <div id="customInfoModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden">
+
+    <div
+      class="bg-white text-black rounded-xl shadow-lg p-6 w-[90%] max-w-md text-center animate-slideToCenter h-[80%] overflow-y-auto">
+      <img src="{% static 'consumer/assets/images/cancel.png' %}"
+        onclick="document.getElementById('customInfoModal').classList.add('hidden')" alt="Close"
+        class="absolute top-4 right-4 w-6 h-6 cursor-pointer z-10 filter brightness-0" />
+
+      <h2 class="text-lg font-bold mb-4">Terms & Conditions</h2>
+      {% comment %} <ul class="list-disc font-medium text-left space-y-2 px-4">
+        <li>Scan your Pepsi purchase receipt to join the event instantly.</li>
+        <li>Each valid receipt counts as one entry into the contest.</li>
+        <li>Multiple receipts = more chances to win exclusive Pepsi rewards.</li>
+        <li>Receipts must be clear, showing purchase date and store details.</li>
+        <li>Only receipts from participating stores will be accepted.</li>
+        <li>Prizes include Pepsi merchandise, free drinks, and event tickets.</li>
+        <li>Winners will be notified via SMS or email within 7 days.</li>
+      </ul> {% endcomment %}
+      <button
+        class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] text-sm mt-6 font-extrabold px-6 tracking-wide text-white w-full py-3 rounded-full shadow-md hover:bg-black hover:text-[#C6A75F] hover:border-2 hover:bg-none hover:border-[#C6A75F] transition"
+        style="font-family: 'MyFont', sans-serif;">
+        Call Now: 000-000-000
+      </button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="{% static 'consumer/js/consumer.js' %}"></script>
+</body>
+
+</html>

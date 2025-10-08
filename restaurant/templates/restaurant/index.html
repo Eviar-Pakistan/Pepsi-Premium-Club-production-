@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pepsi Restaurant</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          monserrat: ['Montserrat'],
+        },
+      },
+    },
+  }
+</script>
+<style>
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid transparent;
+    border-top-color: #C6A75F;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  /* Animations */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes slideToCenter {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .icon2 {
+    filter: brightness(0);
+  }
+
+  .icon {
+    filter: brightness(0) invert(1);
+  }
+
+
+  /* hidding inputs spinners */
+  /* Chrome, Safari, Edge */
+  .otp-input::-webkit-inner-spin-button,
+  .otp-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  .otp-input {
+    -moz-appearance: textfield;
+  }
+
+  
+  
+</style>
+
+<body class="bg-black flex items-center  justify-center min-h-screen font-monserrat">
+
+
+  </div>
+  <!-- Screen 0: Intro -->
+  <div id="screen0" class="w-full   max-w-md text-center p-6">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo" class="absolute object-contain w-10 right-3 top-1" />
+    </div>
+    {% csrf_token %}
+    <img src="{% static 'restaurant/assets/images/Premium.png' %} " alt="Pepsi Logo" class="mx-auto object-contain mb-12 w-44">
+    <input inputmode="numeric" pattern="[0-9]*" type="number" id="numberInput" placeholder="ENTER NUMBER"
+      class="w-full border-2 border-[#C6A75F] text-xl  font-semibold placeholder-white text-white p-3 rounded-[5px] mb-4 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#C6A75F] no-spinner" />
+    <button id="loginButton"
+      class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+      LOGIN
+    </button>
+    
+  </div>
+
+  <!-- Screen 1: Camera -->
+  <div id="screen1" class=" w-full hidden  max-w-md text-center p-6">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo" class="absolute object-contain w-12 right-3 top-1" />
+    </div>
+    <img src="{% static 'restaurant/assets/images/Premium.png' %} " alt="Pepsi Logo" class="mx-auto object-contain mb-12 w-44">
+    <div id="otpSection" class="w-full max-w-md text-center p-6">
+      <h2 class="text-white text-xl font-semibold mb-4">Enter 4-Digit OTP</h2>
+      <div class="flex justify-center gap-3 mb-6">
+        <input type="number" maxlength="1"
+          class="otp-input w-12 h-12 text-center text-white bg-transparent border-2 border-[#C6A75F] rounded-[5px] text-xl focus:outline-none focus:ring-2 focus:ring-[#C6A75F] no-spinner" />
+        <input type="number" maxlength="1"
+          class="otp-input w-12 h-12 text-center text-white bg-transparent border-2 border-[#C6A75F] rounded-[5px] text-xl focus:outline-none focus:ring-2 focus:ring-[#C6A75F] " />
+        <input type="number" maxlength="1"
+          class="otp-input w-12 h-12 text-center text-white bg-transparent border-2 border-[#C6A75F] rounded-[5px] text-xl focus:outline-none focus:ring-2 focus:ring-[#C6A75F] " />
+        <input type="number" maxlength="1"
+          class="otp-input w-12 h-12 text-center text-white bg-transparent border-2 border-[#C6A75F] rounded-[5px] text-xl focus:outline-none focus:ring-2 focus:ring-[#C6A75F] " />
+        
+      </div>
+      <button id="verifyOtpButton"
+       class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+        VERIFY OTP
+      </button>
+    </div>
+  </div>
+
+  
+  <!-- Loader Screen -->
+
+
+  <div id="loaderScreen" class="hidden w-full max-w-md  flex items-center justify-center text-center p-6">
+    <div class="loader spinner">
+    </div>
+  </div>
+
+  
+  <div id="customAlert" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden">
+    <div class="bg-white text-black rounded-[5px] shadow-lg p-6 w-[90%] max-w-md text-center animate-slideToCenter">
+      <p id="alertMessage" class="text-xl font-medium mb-4"></p>
+      <button onclick="closeAlert()"
+        class="bg-[#C6A75F] font-bold rounded-[5px] text-xl  text-white w-fit px-4 py-3 shadow-md   rounded-[5px] border-2 border-[#C6A75F] hover:bg-black hover:text-[#C6A75F] transition">
+        OK
+      </button>
+    </div>
+  </div>
+
+  <script src="{% static 'restaurant/js/login.js' %}"></script>
+</body>
+
+</html>

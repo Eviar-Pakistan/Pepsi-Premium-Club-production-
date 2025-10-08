@@ -1,0 +1,778 @@
+{% load static %}
+<!DOCTYPE html><html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="images/pepsi logo.png' %}" type="image/ico" sizes="32x32">
+    <title> Pepsico | Details Restaurant </title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+</head>
+
+<body>
+    <header>
+        <!-- <div class="container-fluid"> -->
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md headerNav">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="{% url 'dashboard:index' %}">
+                                <img src="{% static 'dashboard/assets/images/pepsi logo.png' %}" alt="" loading="lazy" class="brand-logo">
+                            </a>
+                          
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ms-auto align-items-md-center align-items-end">
+                                    
+                                    <li class="nav-item">
+                                        <div class="dropdown-center">
+                                            <button class="dropdown-toggle d-flex align-items-center userDrp"
+                                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="{% static 'dashboard/assets/images/avatar.png' %}" alt="avatar" class="userAvatar">
+                                                <span class="userName">{{username}}</span>
+                                            </button>
+                                        
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        <!-- </div> -->
+    </header>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex">
+                                   <div class="sideNav marginTopAll">
+                            <ul class="mb-lg-5">
+
+                                <li>
+                                    <a href="{% url 'dashboard:index' %}">
+                                        <svg class="svgNavIcon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g mask="url(#mask0_2018_17134)">
+                                                <path
+                                                    d="M10.2534 5.88437L10.5318 10.0243L10.67 12.1051C10.6715 12.3191 10.705 12.5317 10.7697 12.736C10.9366 13.1326 11.3382 13.3846 11.7751 13.367L18.4323 12.9315C18.7206 12.9268 18.999 13.0346 19.2062 13.2313C19.3789 13.3952 19.4904 13.6096 19.5256 13.8402L19.5374 13.9802C19.2619 17.7949 16.4602 20.9767 12.6534 21.798C8.84652 22.6193 4.94283 20.8843 3.06168 17.5349C2.51936 16.5618 2.18062 15.4923 2.06535 14.389C2.0172 14.0624 1.996 13.7325 2.00195 13.4025C1.996 9.31276 4.90845 5.77699 8.9853 4.9246C9.47598 4.84819 9.957 5.10795 10.1538 5.55556C10.2047 5.65922 10.2383 5.77024 10.2534 5.88437Z" />
+                                                <path opacity="0.4"
+                                                    d="M21.9996 9.81226L21.9926 9.84485L21.9724 9.89224L21.9752 10.0224C21.9648 10.1947 21.8982 10.3605 21.7836 10.4945C21.6641 10.634 21.5009 10.729 21.3212 10.7659L21.2116 10.7809L13.5308 11.2786C13.2753 11.3038 13.0209 11.2214 12.831 11.052C12.6726 10.9107 12.5714 10.7201 12.5428 10.5147L12.0273 2.84503C12.0183 2.8191 12.0183 2.79099 12.0273 2.76505C12.0343 2.55364 12.1274 2.35381 12.2857 2.2102C12.4439 2.06659 12.6543 1.99117 12.8696 2.00079C17.4295 2.1168 21.2619 5.39576 21.9996 9.81226Z" />
+                                            </g>
+                                        </svg>
+                                        Analytics</a>
+                                </li>
+
+ <li>
+                                    <a href="{% url 'dashboard:bottler' %}" class="position-relative svgpath1">
+                                       <img src="{% static 'dashboard/assets/images/factory.png' %}" />
+                                            
+                                            &nbsp; &nbsp;Users
+
+                                    </a>
+                                </li>
+                                <!-- <li>
+                                    <a href="consumers.html">
+                                        <svg class="svgNavIcon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12 12C13.1935 12 14.3381 11.5259 15.182 10.682C16.0259 9.83807 16.5 8.69347 16.5 7.5C16.5 6.30653 16.0259 5.16193 15.182 4.31802C14.3381 3.47411 13.1935 3 12 3C10.8065 3 9.66193 3.47411 8.81802 4.31802C7.97411 5.16193 7.5 6.30653 7.5 7.5C7.5 8.69347 7.97411 9.83807 8.81802 10.682C9.66193 11.5259 10.8065 12 12 12ZM12 13.5C10.4087 13.5 8.88258 12.8679 7.75736 11.7426C6.63214 10.6174 6 9.0913 6 7.5C6 5.9087 6.63214 4.38258 7.75736 3.25736C8.88258 2.13214 10.4087 1.5 12 1.5C13.5913 1.5 15.1174 2.13214 16.2426 3.25736C17.3679 4.38258 18 5.9087 18 7.5C18 9.0913 17.3679 10.6174 16.2426 11.7426C15.1174 12.8679 13.5913 13.5 12 13.5Z" />
+                                            <path
+                                                d="M12 12C12.1989 12 12.3897 12.079 12.5303 12.2197C12.671 12.3603 12.75 12.5511 12.75 12.75V18.75C12.75 18.9489 12.671 19.1397 12.5303 19.2803C12.3897 19.421 12.1989 19.5 12 19.5C11.8011 19.5 11.6103 19.421 11.4697 19.2803C11.329 19.1397 11.25 18.9489 11.25 18.75V12.75C11.25 12.5511 11.329 12.3603 11.4697 12.2197C11.6103 12.079 11.8011 12 12 12Z" />
+                                            <path
+                                                d="M9 15.213V16.7355C6.3225 17.1645 4.5 18.0915 4.5 18.75C4.5 19.6335 7.779 21 12 21C16.221 21 19.5 19.6335 19.5 18.75C19.5 18.09 17.6775 17.1645 15 16.7355V15.213C18.495 15.7275 21 17.118 21 18.75C21 20.82 16.971 22.5 12 22.5C7.029 22.5 3 20.82 3 18.75C3 17.1165 5.505 15.7275 9 15.213Z" />
+                                        </svg>
+                                        Venues</a>
+                                </li> -->
+
+<!-- 
+                                <li>
+                                    <a href="games.html">
+                                        <svg class="svgNavIcon2" viewBox="0 0 25 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.0695 12.46L7.01953 15.51" stroke-width="1.5"
+                                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.0498 12.49L10.0998 15.54" stroke-width="1.5"
+                                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M14.0303 14H14.0403" stroke-width="2" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M17.9697 14H17.9797" stroke-width="2" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M16 15.98V15.96" stroke-width="2" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M16 12.04V12.02" stroke-width="2" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M9.5 22H15.5C20.5 22 22.5 20 22.5 15V13C22.5 8 20.5 6 15.5 6H9.5C4.5 6 2.5 8 2.5 13V15C2.5 20 4.5 22 9.5 22Z"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M13.5105 2L13.5005 3.01C13.4905 3.56 13.0505 4 12.5005 4H12.4705C11.9205 4 11.4805 4.45 11.4805 5C11.4805 5.55 11.9305 6 12.4805 6H13.4805"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+
+                                        Games</a>
+                                </li> -->
+
+
+                                <li>
+                                    <a href="{% url 'dashboard:restaurant' %}" class="active">
+                                        <svg class="svgNavIcon" viewBox="0 0 25 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_2018_17117)">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M21.6444 5.472L22.1381 7.314C22.2038 7.55982 22.1999 7.8191 22.1267 8.06281C22.0535 8.30652 21.9139 8.52507 21.7236 8.694L21.6572 8.74971C21.3301 9.00489 21.0841 9.34952 20.949 9.74178C20.8139 10.134 20.7956 10.5571 20.8962 10.9596C20.9969 11.362 21.2121 11.7267 21.516 12.0092C21.8198 12.2917 22.1991 12.48 22.6078 12.5511L22.7003 12.5653C22.9593 12.599 23.2024 12.7088 23.3989 12.8809C23.5954 13.0529 23.7363 13.2795 23.8039 13.5317L24.3066 15.4071C24.365 15.6246 24.3799 15.8514 24.3506 16.0747C24.3212 16.2979 24.2482 16.5132 24.1356 16.7082C24.0231 16.9032 23.8732 17.0741 23.6946 17.2112C23.516 17.3483 23.3121 17.4489 23.0946 17.5071L5.70749 22.1657C5.26835 22.2833 4.80051 22.2216 4.40686 21.9942C4.0132 21.7668 3.72598 21.3924 3.60835 20.9533L3.13564 19.1889C3.06519 18.9263 3.06776 18.6494 3.14305 18.3882C3.21835 18.127 3.36352 17.8912 3.56292 17.7064L3.63278 17.6464C3.95306 17.3851 4.19096 17.0368 4.31779 16.6434C4.44463 16.25 4.455 15.8283 4.34766 15.4291C4.24031 15.0299 4.01983 14.6703 3.71278 14.3936C3.40573 14.1169 3.02521 13.9348 2.61707 13.8694C2.33479 13.8239 2.07169 13.6977 1.85947 13.5061C1.64725 13.3145 1.49495 13.0656 1.42092 12.7894L0.946065 11.0181C0.88781 10.8006 0.872972 10.5738 0.902399 10.3506C0.931826 10.1273 1.00494 9.91208 1.11757 9.71711C1.2302 9.52214 1.38013 9.35127 1.55881 9.21425C1.73749 9.07724 1.94141 8.97676 2.15892 8.91857L19.5448 4.26C19.7622 4.20166 19.9891 4.18674 20.2123 4.21608C20.4356 4.24542 20.6508 4.31845 20.8458 4.431C21.0408 4.54355 21.2118 4.69341 21.3489 4.87203C21.4859 5.05064 21.5865 5.25451 21.6448 5.472M19.8598 5.73214L2.62221 10.3509C2.38435 10.4147 2.24292 10.6594 2.30678 10.8973L2.64578 12.1629C3.3789 12.3105 4.05623 12.6599 4.60142 13.1718C5.14662 13.6836 5.53801 14.3376 5.73149 15.06C5.9252 15.7824 5.91328 16.5445 5.6971 17.2604C5.48091 17.9764 5.06905 18.6177 4.50792 19.1121L4.84692 20.3777C4.91121 20.6156 5.15549 20.757 5.39335 20.6931L22.6305 16.0744C22.8684 16.0106 23.0098 15.7659 22.9459 15.528L22.6074 14.2629C21.8742 14.1152 21.1969 13.7657 20.6517 13.2537C20.1065 12.7418 19.7151 12.0877 19.5216 11.3653C19.3279 10.643 19.3397 9.88088 19.5558 9.16493C19.7719 8.44898 20.1837 7.80762 20.7448 7.31314L20.4058 6.04757C20.3751 5.93328 20.3004 5.83584 20.1979 5.77669C20.0954 5.71753 19.9741 5.70151 19.8598 5.73214ZM19.3095 14.9717C19.3532 15.1348 19.3643 15.3049 19.3422 15.4723C19.3202 15.6397 19.2653 15.8011 19.1809 15.9473C19.0964 16.0936 18.984 16.2217 18.85 16.3245C18.7161 16.4272 18.5632 16.5026 18.4001 16.5463C18.237 16.59 18.0669 16.6011 17.8995 16.579C17.7321 16.5569 17.5706 16.5021 17.4244 16.4177C17.2782 16.3332 17.1501 16.2208 17.0473 16.0868C16.9445 15.9529 16.8692 15.8 16.8255 15.6369C16.7373 15.3075 16.7836 14.9565 16.9541 14.6612C17.1247 14.3659 17.4055 14.1505 17.7349 14.0623C18.0643 13.9741 18.4153 14.0203 18.7106 14.1909C19.0058 14.3614 19.2213 14.6423 19.3095 14.9717ZM18.4224 11.6597C18.5106 11.9891 18.4644 12.3401 18.2939 12.6354C18.1234 12.9307 17.8425 13.1462 17.5131 13.2345C17.1837 13.3228 16.8328 13.2766 16.5374 13.106C16.2421 12.9355 16.0266 12.6547 15.9384 12.3253C15.8551 11.9976 15.9043 11.6503 16.0752 11.3587C16.2462 11.067 16.5251 10.8544 16.8517 10.7669C17.1782 10.6793 17.5261 10.724 17.82 10.8911C18.1139 11.0582 18.3306 11.3343 18.4224 11.6597ZM17.5343 8.34814C17.5781 8.51124 17.5892 8.68135 17.5672 8.84876C17.5451 9.01618 17.4903 9.17761 17.4059 9.32384C17.3215 9.47007 17.2091 9.59824 17.0751 9.70103C16.9411 9.80383 16.7882 9.87922 16.6251 9.92293C16.462 9.96663 16.2919 9.97778 16.1245 9.95574C15.9571 9.9337 15.7957 9.8789 15.6494 9.79447C15.5032 9.71004 15.375 9.59764 15.2722 9.46367C15.1695 9.32971 15.0941 9.17681 15.0504 9.01371C14.9621 8.68431 15.0083 8.33334 15.1788 8.03802C15.3493 7.74269 15.6302 7.52719 15.9596 7.43893C16.289 7.35067 16.6399 7.39687 16.9353 7.56739C17.2306 7.7379 17.4461 8.01874 17.5343 8.34814ZM13.0931 2.72014L14.1868 4.28186C14.2026 4.305 14.2181 4.32857 14.2326 4.35214L3.76907 7.15586L10.7055 2.29886C11.0779 2.03823 11.5386 1.9362 11.9863 2.0152C12.434 2.0942 12.8323 2.34777 13.0931 2.72014Z" />
+                                            </g>
+                                        </svg>Restaurants</a>
+                                </li>
+
+                                
+                            
+
+                               
+{% if user.is_superuser %}
+                                <li>
+                                    <a href="{% url 'dashboard:lucky-draw' %}">
+                                        <svg class="svgNavIcon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M4.68275 16.4039C5.2694 15.8168 5.95487 15.3376 6.70776 14.9883C5.64604 14.1281 4.96869 12.8156 4.96869 11.3438C4.96869 8.74688 7.13432 6.61641 9.73119 6.65625C12.2882 6.69609 14.3484 8.77969 14.3484 11.3438C14.3484 12.8156 13.6687 14.1281 12.6093 14.9883C13.3623 15.3373 14.0479 15.8166 14.6343 16.4039C15.914 17.6859 16.6406 19.3781 16.6874 21.1828C16.6881 21.2078 16.6837 21.2327 16.6745 21.256C16.6654 21.2793 16.6517 21.3005 16.6342 21.3184C16.6167 21.3363 16.5959 21.3506 16.5728 21.3603C16.5497 21.37 16.525 21.375 16.4999 21.375H15.1874C15.0867 21.375 15.0023 21.2953 14.9999 21.1945C14.9554 19.8352 14.4046 18.5625 13.4367 17.5969C12.9413 17.0989 12.3522 16.7041 11.7032 16.4354C11.0543 16.1667 10.3586 16.0293 9.65619 16.0312C8.22885 16.0312 6.88588 16.5867 5.87572 17.5969C4.9101 18.5625 4.35932 19.8352 4.31244 21.1945C4.3101 21.2953 4.22572 21.375 4.12494 21.375H2.81244C2.78742 21.375 2.76265 21.37 2.73959 21.3603C2.71653 21.3506 2.69565 21.3363 2.67817 21.3184C2.6607 21.3005 2.64699 21.2793 2.63785 21.256C2.62871 21.2327 2.62432 21.2078 2.62494 21.1828C2.67182 19.3781 3.39838 17.6859 4.68275 16.4039ZM9.65619 14.3438C10.4578 14.3438 11.2124 14.032 11.7773 13.4648C12.0608 13.1836 12.2847 12.8482 12.4357 12.4785C12.5867 12.1088 12.6617 11.7126 12.6562 11.3133C12.6492 10.5445 12.3421 9.80156 11.8054 9.25078C11.2429 8.67422 10.4906 8.35313 9.68666 8.34375C8.89213 8.33672 8.12104 8.64609 7.55385 9.20156C6.9726 9.77109 6.65385 10.5328 6.65385 11.3438C6.65385 12.1453 6.96557 12.8977 7.53276 13.4648C7.81102 13.7444 8.14197 13.9661 8.50646 14.1169C8.87094 14.2678 9.26172 14.3449 9.65619 14.3438ZM15.5273 11.9625C15.5484 11.7586 15.5601 11.5523 15.5601 11.3438C15.5601 10.9711 15.5249 10.6078 15.4593 10.2539C15.4429 10.1695 15.4874 10.0828 15.5648 10.0477C15.8835 9.90469 16.1765 9.70781 16.4296 9.45938C16.7279 9.17017 16.9626 8.82197 17.1188 8.43699C17.2749 8.05201 17.3492 7.6387 17.3367 7.22344C17.3156 6.47109 17.0132 5.75625 16.4859 5.21719C15.907 4.62422 15.1288 4.30078 14.3015 4.31016C13.5538 4.31719 12.832 4.60547 12.2859 5.11641C12.1007 5.28984 11.9413 5.48203 11.8078 5.68828C11.7609 5.76094 11.6695 5.79141 11.5898 5.76328C11.1773 5.62031 10.7413 5.51953 10.2937 5.47266C10.1624 5.45859 10.0874 5.31797 10.146 5.20078C10.9078 3.69375 12.464 2.65313 14.264 2.625C16.8632 2.58516 19.0288 4.71563 19.0288 7.31016C19.0288 8.78203 18.3515 10.0945 17.2898 10.9547C18.0351 11.2992 18.7218 11.775 19.3171 12.3703C20.6015 13.6523 21.3281 15.3445 21.3749 17.1516C21.3756 17.1766 21.3712 17.2015 21.362 17.2248C21.3529 17.248 21.3392 17.2693 21.3217 17.2872C21.3042 17.3051 21.2834 17.3193 21.2603 17.329C21.2372 17.3388 21.2125 17.3438 21.1874 17.3438H19.8726C19.7718 17.3438 19.6874 17.2641 19.6851 17.1633C19.6406 15.8039 19.0898 14.5312 18.1218 13.5656C17.4328 12.8766 16.589 12.3984 15.6679 12.1664C15.5765 12.143 15.5156 12.0563 15.5273 11.9625Z" />
+                                        </svg>Lucky Draw</a>
+                                </li>
+                                
+                                
+                                {% endif %}
+                                <li>
+                                   <a href="{% url 'dashboard:report' %}">
+                                       <svg class="svgNavIcon2" viewBox="0 0 24 24" fill="none"
+                                           xmlns="http://www.w3.org/2000/svg">
+                                           <g clip-path="url(#clip0_2018_17115)">
+                                               <path
+                                                   d="M2.12613 11.2114L21.8404 2.24572M21.8404 2.24572L18.1547 0.857147M21.8404 2.24572L20.469 5.93143M22.7147 23.1429H18.429V11.1429C18.429 10.9155 18.5193 10.6975 18.68 10.5368C18.8408 10.376 19.0588 10.2857 19.2861 10.2857H21.8576C22.0849 10.2857 22.3029 10.376 22.4637 10.5368C22.6244 10.6975 22.7147 10.9155 22.7147 11.1429V23.1429ZM14.1433 23.1429H9.85756V13.7143C9.85756 13.487 9.94787 13.2689 10.1086 13.1082C10.2694 12.9475 10.4874 12.8571 10.7147 12.8571H13.2861C13.5135 12.8571 13.7315 12.9475 13.8922 13.1082C14.053 13.2689 14.1433 13.487 14.1433 13.7143V23.1429ZM5.57185 23.1429H1.28613V16.2857C1.28613 16.0584 1.37644 15.8404 1.53718 15.6796C1.69793 15.5189 1.91595 15.4286 2.14328 15.4286H4.7147C4.94203 15.4286 5.16005 15.5189 5.3208 15.6796C5.48154 15.8404 5.57185 16.0584 5.57185 16.2857V23.1429Z"
+                                                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                           </g>
+                                       </svg>Report</a>
+                               </li>
+                                <!-- <li>
+                                    <a href="support.html">
+                                        <svg class="svgNavIcon" viewBox="0 0 25 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12.5 2C6.986 2 2.5 6.486 2.5 12V16.143C2.5 17.167 3.397 18 4.5 18H5.5C5.76522 18 6.01957 17.8946 6.20711 17.7071C6.39464 17.5196 6.5 17.2652 6.5 17V11.857C6.5 11.5918 6.39464 11.3374 6.20711 11.1499C6.01957 10.9624 5.76522 10.857 5.5 10.857H4.592C5.148 6.987 8.478 4 12.5 4C16.522 4 19.852 6.987 20.408 10.857H19.5C19.2348 10.857 18.9804 10.9624 18.7929 11.1499C18.6054 11.3374 18.5 11.5918 18.5 11.857V18C18.5 19.103 17.603 20 16.5 20H14.5V19H10.5V22H16.5C18.706 22 20.5 20.206 20.5 18C21.603 18 22.5 17.167 22.5 16.143V12C22.5 6.486 18.014 2 12.5 2Z" />
+                                        </svg>
+                                        Support</a>
+                                </li> -->
+                            </ul>
+
+
+                            <ul class="mt-lg-5">
+                                
+
+
+                                <li>
+                                    <a  href="#" id="logoutBtn">
+                                        <svg class="svgNavIcon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.0005 3H11.0005V13H13.0005V3ZM17.8305 5.17L16.4105 6.59C18.0505 7.91 19.0005 9.9 19.0005 12C19.0005 13.8565 18.263 15.637 16.9502 16.9497C15.6375 18.2625 13.857 19 12.0005 19C8.14046 19 5.00046 15.88 5.00046 12C5.00046 9.91 5.95046 7.91 7.58046 6.58L6.17046 5.17C2.38046 8.39 1.92046 14.07 5.14046 17.86C8.36046 21.64 14.0405 22.1 17.8305 18.88C19.8505 17.17 21.0005 14.65 21.0005 12C21.0005 9.37 19.8405 6.87 17.8305 5.17Z" />
+                                        </svg>
+                                        Logout</a>
+                                </li>
+
+
+                               
+                            </ul>
+                        </div>
+                        <div class="contentArea">
+                            <button class="open-btn hidden" onclick="toggleSideNav()"><i
+                                    class="fas fa-angle-right"></i></button>
+                            <section class="marginTopAll">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="{% url 'dashboard:restaurant' %}" class="backLink">
+                                                <i class="fas fa-arrow-left me-2"></i>Back</a> <span
+                                                class="backLink">|</span>
+                                            <span class="sub-heading">{{restaurant.restaurant_name}}</span>
+                                        </div>
+                                        {% comment %} <div class="d-flex justify-content-end gap-4" >
+                                         {% if user.is_staff %}
+                                             <div class="text-end orange-btn" id="restaurant-save-btn">
+                                                Save                                   
+                                            </div>
+                                             {% endif %}
+                                        </div> {% endcomment %}
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="sub-heading marginTopAll">Restaurant Information</h2>
+                                            <div class="border-box mt-3">
+                                                <form action="">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 mt-3">
+                                                            <label for="" class="allLbl">Name</label>
+                                                            <input type="text" id="restaurantName" readonly class="allinput w-100"
+                                                                value="{{restaurant.restaurant_name}}" >
+                                                        </div>
+                                                      <div class="col-lg-4 mt-3">
+    <label for="" class="allLbl">Manager</label>
+    <input type="text" id="restaurantManagerName" readonly class="allinput w-100"
+           value="{{ restaurant.manager.name }}" disabled>
+</div>
+                                                        <div class="col-lg-4 mt-3">
+                                                            <label for="" class="allLbl">Contact no</label>
+                                                            <input type="number" readonly id="restaurantcontactNo" class="allinput w-100"
+                                                                value="{{restaurant.manager.phone_number}}" >
+                                                        </div>
+                                                       <div class="col-4 mt-3">
+    <label for="" class="allLbl">Category</label>
+       <input type="text" id="restaurantCategory" readonly class="allinput w-100"
+                                                                value="{{restaurant.restaurant_category}}" >
+
+</div>
+
+       <div class="col-lg-4 mt-3">
+    <label for="" class="allLbl">RSM</label>
+    <input type="text" 
+           class="allinput w-100" 
+           value="{% for rsm in restaurant.rsms.all %}{{ rsm.rsm_name }}{% if not forloop.last %}, {% endif %}{% endfor %}" 
+           readonly>
+</div>
+
+<div class="col-4 mt-3">
+    <label for="" class="allLbl">GM</label>
+    <input type="text" 
+           class="allinput w-100" 
+           value="{% for gm in restaurant.gms.all %}{{ gm.gm_name }}{% if not forloop.last %}, {% endif %}{% endfor %}" 
+           readonly>
+</div>
+
+
+<div class="col-4 mt-3">
+    <label for="" class="allLbl">Bottler</label>
+    <input type="text" 
+           readonly 
+           class="allinput w-100 text-truncate" 
+           value="{{ restaurant.bottler.bottler_name }}" 
+          >
+</div>
+
+
+                                                             
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+{% if user.is_staff %}
+                                      <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="sub-heading marginTopAll">Restaurant Target</h2>
+                                            <div class="border-box mt-3">
+                                                <form action="">
+                                                    <div class="row">
+                                                        
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target type</label>
+  <select name="" id="targettype" class="allinput w-100">
+                                                            <option value="Cases Purchased">Cases Purchased</option>
+                                                            <option value="Consumer">Consumer</option>
+                                                            <option value="Compliance">Compliance</option>
+
+                                                        </select>                                               
+
+                                                    </div>
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target Month</label>
+ <select class="allinput w-100" id="month">
+                                                            <option value="">Select Month</option>
+                                                            <option value="Jan">Jan</option>
+                                                            <option value="Feb">Feb</option>
+                                                            <option value="Mar">Mar</option>
+                                                            <option value="Apr">Apr</option>
+                                                            <option value="May">May</option>
+                                                            <option value="Jun">Jun</option>
+                                                            <option value="Jul">Jul</option>
+                                                            <option value="Aug">Aug</option>
+                                                            <option value="Sep">Sep</option>
+                                                            <option value="Oct">Oct</option>
+                                                            <option value="Nov">Nov</option>
+                                                            <option value="Dec">Dec</option>
+
+
+                                                        </select>
+                                                    </div>
+                                                     <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target Value</label>
+                                                        <input type="number" id="targetvalue" class="allinput w-100">
+
+                                                    </div>
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target Status</label>
+<select name="" id="targetstatus" data-id="{{restaurant.id}}" class="allinput w-100">
+                                                            <option value="Active">Active</option>
+                                                            <option value="Consumer">Inactive</option>
+                                                        </select>                                                          
+                                                </div>
+
+
+                                                  <div class="col-lg-6 mt-3">
+ <div class="text-end orange-btn" id="restaurant-target-btn">
+                                                Save                                   
+                                            </div>                                                        
+                                                </div>
+                                                
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                      {% endif %}          
+                                         <div class="row mb-2">
+                                        <div class="col-12">
+                                    <h2 class="sub-heading marginTopAll">Target Information</h2>
+                                            <div class="border-box marginTopAll px-0">
+                                                <div class="table-responsive mt-3">
+                                                    <table class="table dataTable">
+                                                        <thead>
+                                                            <th>
+                                                                <p class="checkbx">
+                                                                   
+                                                                    <label for="c1">Target Type </label>
+                                                                </p>
+                                                            </th>
+                                                            <th>Target Month </th>
+                                                            <th>Target Value</th>
+                                                            <th>Target Status</th>
+ {%if user.is_staff %}
+                                                            <th>Actions</th>
+                   {% endif %}
+                                                        </thead>
+                                                        <tbody>
+
+                                                            {%if restaurant_target %}
+{% for target in restaurant_target %}
+
+                                                            <tr >
+                                                                    
+                                                                    <td>
+                                                                        <p class="checkbx">
+                                                                        <label for="c2">{{target.target_type}}</label>
+                                                                    </p>
+                                                                </td>
+                                                                <td>{{target.target_month}}</td>
+                                                                <td>{{target.target_value}}</td>
+                                                                {% if target.target_status == True %}
+                                                                <td><span class="activeSpan">Active</span></td>
+                                                                {% else %}
+                                                                <td><span class="inactiveSpan">Inactive</span></td>
+                                                                {% endif %}
+             
+                                                                {% if user.is_staff %}
+                                                                <td>
+
+              <button 
+    class="blue-btn edittargetBtn" 
+    data-bs-toggle="modal"
+    data-bs-target="#editTarget"
+    data-id="{{ target.id }}">
+    <i class="fas fa-edit"></i> Edit
+</button>
+
+              
+            </td>     
+            {% endif %}
+                                                            </tr>
+{% endfor %}
+
+{% else %}
+<tr>
+    <td colspan="5" class="text-center">No targets available.</td>
+</tr>
+{% endif %}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                          <ul class="pagination mt-3 justify-content-end pe-3">
+    {% if restaurant_target.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ restaurant_target.previous_page_number }}">Previous</a>
+        </li>
+    {% endif %}
+
+    {% for num in restaurant_target.paginator.page_range %}
+        <li class="page-item {% if restaurant_target.number == num %}active{% endif %}">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+    {% endfor %}
+
+    {% if restaurant_target.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ restaurant_target.next_page_number }}">Next</a>
+        </li>
+    {% endif %}
+</ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if user.is_staff %}
+                                    <div class="modal fade" id="editTarget" tabindex="-1"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-3">
+                                            <h2 class="sub-heading">Edit Target</h2>
+                                            
+                                            <form action="">
+                                                <div class="row">
+                                                   <div class="col-12">
+                                            <h2 class="sub-heading marginTopAll">Restaurant Target</h2>
+                                                <form action="">
+                                                    <div class="row">
+                                                        
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target type</label>
+                                             <input type="text" readonly id="edittargettype" class="allinput w-100">
+                                                  </div>
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target Month</label>
+ <select class="allinput w-100" id="editmonth">
+                                                            <option value="">Monthly</option>
+                                                            <option value="Jan">Jan</option>
+                                                            <option value="Feb">Feb</option>
+                                                            <option value="Mar">Mar</option>
+                                                            <option value="Apr">Apr</option>
+                                                            <option value="May">May</option>
+                                                            <option value="Jun">Jun</option>
+                                                            <option value="Jul">Jul</option>
+                                                            <option value="Aug">Aug</option>
+                                                            <option value="Sep">Sep</option>
+                                                            <option value="Oct">Oct</option>
+                                                            <option value="Nov">Nov</option>
+                                                            <option value="Dec">Dec</option>
+
+
+                                                        </select>
+                                                    </div>
+                                                     <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target Value</label>
+                                                        <input type="number" id="edittargetvalue" class="allinput w-100">
+
+                                                    </div>
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target Status</label>
+<select id="edittargetstatus" class="allinput w-100">
+  <option value="Active">Active</option>
+  <option value="Inactive">Inactive</option>
+</select>
+                                                        
+                                                </div>
+                                           
+
+                                                    
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 text-end mt-3">
+                                                        <button class="orange-btn-3">Cancel</button>
+                                                        <button type="button"  id="saveTargetBtn" class="orange-btn"
+                                                            data-bs-dismiss="modal" aria-label="Close">Save</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+    {% comment %} <div class="row">
+                                        <div class="col-12">
+                                    <h2 class="sub-heading marginTopAll">Bottle Case Targets</h2>
+                                            <div class="border-box marginTopAll px-0">
+                                                <div class="table-responsive mt-3">
+                                                    <table class="table dataTable">
+                                                        <thead>
+                                                            <th>
+                                                                <p class="checkbx">
+                                                                   
+                                                                    <label for="c1">Sale Month</label>
+                                                                </p>
+                                                            </th>
+                                                            <th>Case Quantity </th>
+                                                            <th>Requested at</th>
+                                                            <th>Target Status</th>
+
+                                                            <th>Actions</th>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            {%if bottle_crate_target %}
+{% for target in bottle_crate_target %}
+
+                                                            <tr >
+                                                                    
+                                                                    <td>
+                                                                        <p class="checkbx">
+                                                                        <label for="c2">{{target.sale_month}}</label>
+                                                                    </p>
+                                                                </td>
+                                                                <td>{{target.crate_quantity}}</td>
+                                                                <td>{{target.created_at}}</td>
+                                                                {% if target.is_approved == True %}
+                                                                <td><span class="activeSpan">Approved</span></td>
+                                                                {% elif target.is_declined == True  %}
+                                                                <td><span class="inactiveSpan">Declined</span></td>
+                                                                {% else %}
+                                                                <td><span class="inactiveSpan">Requested</span></td>
+                                                                {% endif %}
+             
+                                                                {% if not target.is_declined %}
+                                                                <td>
+              <button 
+    class="blue-btn editcrateBtn" 
+    data-bs-toggle="modal"
+    data-bs-target="#editCrate"
+    data-id="{{ target.id }}">
+    <i class="fas fa-edit"></i> Edit
+</button>
+{% endif %}
+              
+            </td>     
+           
+                                                            </tr>
+{% endfor %}
+
+{% else %}
+<tr>
+    <td colspan="5" class="text-center">No targets available.</td>
+</tr>
+{% endif %}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                               <ul class="pagination mt-3 justify-content-end pe-3">
+    {% if bottle_crate_target.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ bottle_crate_target.previous_page_number }}">Previous</a>
+        </li>
+    {% endif %}
+
+    {% for num in bottle_crate_target.paginator.page_range %}
+        <li class="page-item {% if bottle_crate_target.number == num %}active{% endif %}">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+    {% endfor %}
+
+    {% if bottle_crate_target.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ bottle_crate_target.next_page_number }}">Next</a>
+        </li>
+    {% endif %}
+</ul>
+
+                                            </div>
+                                        </div>
+                                    </div>     
+                                {% endcomment %}
+                               
+                                
+
+
+
+                                    {% comment %} <div class="modal fade" id="editCrate" tabindex="-1"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-3">
+                                            <h2 class="sub-heading">Approved Case Sales</h2>
+                                            
+                                            <form action="">
+                                                <div class="row">
+                                                   <div class="col-12">
+                                            <h2 class="sub-heading marginTopAll">Bottle Case Target</h2>
+                                                <form action="">
+                                                    <div class="row">
+                                                        
+                                                    
+                                                     <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Requested at</label>
+                                                        <input type="text" id="requestedate" readonly class="allinput w-100">
+
+                                                    </div>
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Target Status</label>
+<select id="editcratestatus" class="allinput w-100">
+  <option value="Requested" >Select Status</option>  
+  <option value="Approved">Approved</option>
+  <option value="Declined">Declined</option>
+</select>
+                                                        
+                                                </div>
+                                           
+
+                                                    
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 text-end mt-3">
+                                                        <button class="orange-btn-3">Cancel</button>
+                                                        <button type="button " id="saveCrateBtn" class="orange-btn"
+                                                            data-bs-dismiss="modal" aria-label="Close">Save</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                        </div> {% endcomment %}
+
+
+                        <!-- <div class="row marginTopAll">
+                                        <div class="col-lg-3 col-md-6 mt-md-0 mt-3">
+                                            <div class="customcard bg-orange">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{% static 'dashboard/assets/images/rupee.png' %}" alt="">
+                                                    <h3>Total Sale</h3>
+                                                </div>
+                                                <h2> 500</h2>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 mt-md-0 mt-3">
+                                            <div class="customcard bg-green">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{% static 'dashboard/assets/images/restaurant.png' %}" alt="">
+                                                    <h3>Total Restaurant</h3>
+                                                </div>
+                                                <h2>200</h2>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-lg-3 col-md-6 mt-md-0 mt-3">
+                                            <div class="customcard bg-orange">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{% static 'dashboard/assets/images/compliant.png' %}" alt="">
+                                                    <h3>Avg.Compliance</h3>
+                                                </div>
+                                                <h2>20%</h2>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-lg-3 col-md-6 mt-md-0 mt-3">
+                                            <div class="customcard bg-green">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{% static 'dashboard/assets/images/group.png' %}" alt="">
+                                                    <h3>Total Consumers</h3>
+                                                </div>
+                                                <h2>500</h2>
+                                            </div>
+                                        </div>
+                                      
+                                    </div> -->
+                                    <!-- <div class="row marginTopAll">
+                                        <div class="col-12">
+                                            <div class="border-box">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h2 class="sub-heading">Sales Volume vs Target</h2>
+                                                    </div>
+                                                     <div class="col-md-6 text-end">
+                                                        <select class="allSelect me-2">
+                                                            <option value="">Role</option>
+                                                            <option value="Bottler" >Bottler</option>
+                                                            <option value="Bottler" >GM</option>
+                                                            <option value="Bottler" >RSM</option>
+
+                                                        </select>
+                                                        <select class="allSelect">
+                                                            <option value="">Monthly</option>
+                                                            <option value="Jan">Jan</option>
+                                                            <option value="Feb">Feb</option>
+                                                            <option value="Mar">Mar</option>
+                                                            <option value="Apr">Apr</option>
+                                                            <option value="May">May</option>
+                                                            <option value="Jun">Jun</option>
+                                                            <option value="Jul">Jul</option>
+                                                            <option value="Aug">Aug</option>
+                                                            <option value="Sep">Sep</option>
+                                                            <option value="Oct">Oct</option>
+                                                            <option value="Nov">Nov</option>
+                                                            <option value="Dec">Dec</option>
+
+
+                                                        </select>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <canvas id="balance" height="90"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                             
+                              
+                                </div> -->
+                            </section>
+                            <!--footer start here-->
+                                    <div class="modal fade" id="restaurantsuccessModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body p-3">
+                        <center><img src="{% static 'dashboard/assets/images/check.png' %}" alt="Success Icon" /></center>
+                        <h1 id="restaurantsuccess" class="success-text" style="text-align:center;padding-top:10px;font-size:24px;">
+                          
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="restauranterrorModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body p-3">
+                        <center><img src="{% static 'dashboard/assets/images/multiply.png' %}" alt="Success Icon" /></center>
+                        <h1 id="restauranterror" class="error-text" style="text-align:center;padding-top:10px;font-size:24px;">
+                          
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="{% static 'dashboard/js/restaurant.js' %}"></script>
+</body>
+
+</html>
+
+<!--footer end here-->

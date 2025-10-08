@@ -1,0 +1,701 @@
+{% load static %}
+<!DOCTYPE html><html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="images/pepsi logo.png' %}" type="image/ico" sizes="32x32">
+    <title> Pepsico | Lucky Draw </title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+</head>
+
+<body>
+    <header>
+        <!-- <div class="container-fluid"> -->
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md headerNav">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="{% url 'dashboard:index' %}">
+                                <img src="{% static 'dashboard/assets/images/pepsi logo.png' %}" alt="" loading="lazy" class="brand-logo">
+                            </a>
+
+                                                                    <h1 class="text-white " style="font-size:24px;font-weight:bold" >Pepsi Premium Club</h1>
+
+                          
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ms-auto align-items-md-center align-items-end">
+                                   
+                                    <li class="nav-item">
+                                        <div class="dropdown-center">
+                                            <button class="dropdown-toggle d-flex align-items-center userDrp"
+                                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="{% static 'dashboard/assets/images/avatar.png' %}" alt="avatar" class="userAvatar">
+                                                <span class="userName">{{username}}</span>
+                                            </button>
+                                          
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        <!-- </div> -->
+    </header>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex">
+                       <div class="sideNav marginTopAll">
+                            <ul class="mb-lg-5">
+
+                                <li>
+                                    <a href="{% url 'dashboard:index' %}">
+                                        <img src="{% static 'dashboard/assets/images/analysis.png' %}" />
+                                        &nbsp; &nbsp;Analytics</a>
+                                </li>
+
+  <li>
+                                    <a href="{% url 'dashboard:bottler' %}" class="position-relative svgpath1">
+                                    <img src="{% static 'dashboard/assets/images/factory.png' %}" />
+                                            
+                                            &nbsp; &nbsp;Users
+                                            
+                                                
+
+                                    </a>
+                                </li>
+
+<li>
+                                    <a href="{% url 'dashboard:restaurant' %}" class="d-flex align-items-center">
+                                        <img src="{% static 'dashboard/assets/images/restaurant.png' %}" />
+                                        &nbsp; &nbsp;Restaurants</a>
+                                </li>
+
+                            
+
+
+                                
+
+                              
+                                
+ <li>
+                                    <a href="{% url 'dashboard:lucky-draw' %}" class="d-flex align-items-center active" >
+                                       <img src="{% static 'dashboard/assets/images/ticket.png' %}" />
+                                &nbsp; &nbsp;Lucky Draw</a>
+                                </li>
+<li>
+                                    <a href="{% url 'dashboard:report' %}">
+                                       <img src="{% static 'dashboard/assets/images/report.png' %}" />
+                &nbsp; &nbsp;Report</a>
+                                </li>
+
+                                <!-- <li>
+                                    <a href="support.html">
+                                        <svg class="svgNavIcon" viewBox="0 0 25 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12.5 2C6.986 2 2.5 6.486 2.5 12V16.143C2.5 17.167 3.397 18 4.5 18H5.5C5.76522 18 6.01957 17.8946 6.20711 17.7071C6.39464 17.5196 6.5 17.2652 6.5 17V11.857C6.5 11.5918 6.39464 11.3374 6.20711 11.1499C6.01957 10.9624 5.76522 10.857 5.5 10.857H4.592C5.148 6.987 8.478 4 12.5 4C16.522 4 19.852 6.987 20.408 10.857H19.5C19.2348 10.857 18.9804 10.9624 18.7929 11.1499C18.6054 11.3374 18.5 11.5918 18.5 11.857V18C18.5 19.103 17.603 20 16.5 20H14.5V19H10.5V22H16.5C18.706 22 20.5 20.206 20.5 18C21.603 18 22.5 17.167 22.5 16.143V12C22.5 6.486 18.014 2 12.5 2Z" />
+                                        </svg>
+                                        Support</a>
+                                </li> -->
+                            </ul>
+
+
+                            <ul class="mt-lg-5">
+                                
+
+
+                                <li>
+                                    <a  href="#" id="logoutBtn">
+                                        <svg class="svgNavIcon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.0005 3H11.0005V13H13.0005V3ZM17.8305 5.17L16.4105 6.59C18.0505 7.91 19.0005 9.9 19.0005 12C19.0005 13.8565 18.263 15.637 16.9502 16.9497C15.6375 18.2625 13.857 19 12.0005 19C8.14046 19 5.00046 15.88 5.00046 12C5.00046 9.91 5.95046 7.91 7.58046 6.58L6.17046 5.17C2.38046 8.39 1.92046 14.07 5.14046 17.86C8.36046 21.64 14.0405 22.1 17.8305 18.88C19.8505 17.17 21.0005 14.65 21.0005 12C21.0005 9.37 19.8405 6.87 17.8305 5.17Z" />
+                                        </svg>Logout</a>
+                                </li>
+
+
+                               
+                            </ul>
+                        </div>
+                        <div class="contentArea">
+                            <button class="open-btn hidden" onclick="toggleSideNav()"><i
+                                    class="fas fa-angle-right"></i></button>
+
+                                     <section class="marginTopAll">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6 mt-md-0 mt-3">
+                                            <div class="customcard bg-orange">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{% static 'dashboard/assets/images/rupee.png' %}" alt="">
+                                                    <h3>Active Draws</h3>
+                                                </div>
+                                                <h2>2</h2>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 mt-md-0 mt-3">
+                                            <div class="customcard bg-green">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{% static 'dashboard/assets/images/compliant.png' %}" alt="">
+                                                    <h3>No.of Winners</h3>
+                                                </div>
+                                                <h2>98</h2>
+                                            </div>
+                                        </div>
+
+                                            <div class="col-lg-4 col-md-6 mt-md-0 mt-3">
+                                            <div class="customcard bg-orange">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{% static 'dashboard/assets/images/restaurant.png' %}" alt="">
+                                                    <h3>Draws Done</h3>
+                                                </div>
+                                                <h2>21</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="marginTopAll">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="tabsDiv">
+                                                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="pills-user-tab"
+                                                            data-bs-toggle="pill" data-bs-target="#pills-user"
+                                                            type="button" role="tab" aria-controls="pills-user"
+                                                            aria-selected="true">Active Draws</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-role-tab"
+                                                            data-bs-toggle="pill" data-bs-target="#pills-role"
+                                                            type="button" role="tab" aria-controls="pills-role"
+                                                            aria-selected="false">Draws History</button>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane fade show active marginTopAll" id="pills-user"
+                                                    role="tabpanel" aria-labelledby="pills-user-tab" tabindex="0">
+                                                    <div class="row">
+                                                        <div class="offset-md-2 col-10 mt-md-0 mt-3  text-end">
+                                                            <button class="orange-btn" data-bs-toggle="modal"
+                                                                data-bs-target="#newUser" aria-label="New Ticket">
+                                                                <i class="fas fa-plus me-2"></i>Create Lucky Draw
+                                                            </button>
+                                                        </div>
+                                                      
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="border-box marginTopAll px-0">
+                                                                <div class="table-responsive mt-3">
+                                                                   <table class="table dataTable">
+    <thead>
+        <th>
+            <p class="checkbx">
+                <label for="c1">Lucky Draw Name</label>
+            </p>
+        </th>
+        <th>No.of Winners</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Type</th>
+        <th>Actions</th> <!-- Added column -->
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <p class="checkbx">
+                    <input type="checkbox" id="c2" name="cb">
+                    <label for="c2">Lucky Draw 1</label>
+                </p>
+            </td>
+            <td>120</td>
+            <td>2023-12-31</td>
+            <td>2023-12-31</td>
+            <td>Restaurant</td>
+            <td>
+                <button class="blue-btn" data-bs-toggle="modal" data-bs-target="#editLuckyDraw">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                    <button class="red-btn">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+                <button class="orange-btn">
+                    <i class="fas fa-redo"></i> Re-Run
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="checkbx">
+                    <input type="checkbox" id="c3" name="cb">
+                    <label for="c3">Lucky Draw 2</label>
+                </p>
+            </td>
+            <td>120</td>
+            <td>2023-12-31</td>
+            <td>2023-12-31</td>
+            <td>Consumer</td>
+           <td>
+                <button class="blue-btn" data-bs-toggle="modal" data-bs-target="#editLuckyDraw">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                    <button class="red-btn">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+                <button class="orange-btn">
+                    <i class="fas fa-redo"></i> Re-Run
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+                                                                </div>
+                                                                <ul class="pagination mt-3 justify-content-end pe-3">
+                                                                    <li class="page-item"><a class="page-link"
+                                                                            href="#">Previous</a></li>
+                                                                    <li class="page-item active"><a class="page-link"
+                                                                            href="#">1</a></li>
+                                                                    <li class="page-item"><a class="page-link"
+                                                                            href="#">2</a></li>
+                                                                    <li class="page-item"><a class="page-link"
+                                                                            href="#">3</a></li>
+                                                                    <li class="page-item"><a class="page-link"
+                                                                            href="#">Next</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade marginTopAll" id="pills-role" role="tabpanel"
+                                                    aria-labelledby="pills-role-tab" tabindex="0">
+                                                   
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="border-box marginTopAll px-0">
+                                                                <div class="table-responsive mt-3">
+                                                                    <table class="table dataTable">
+                                                                        <thead>
+                                                                            <th>
+                                                                                <p class="checkbx">
+                                                                               
+                                                                                    <label for="c1">Lucky Draw Name </label>
+                                                                                </p>
+                                                                            </th>
+                                                                            <th>No.of Winners
+                                                                            </th>
+                                                                            <th>Start Date</th>
+                                                                            <th>End Date</th>
+                                                                            <th>Type</th>
+                                                                            <th>Actions</th>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr >
+                                                                                <td>
+                                                                                    <p class="checkbx">
+                                                                                        <input type="checkbox" id="c2"
+                                                                                            name="cb">
+                                                                                        <label for="c2">Lucky Draw 1</label>
+                                                                                    </p>
+                                                                                </td>
+                                                                                <td>120</td>
+                                                                                <td>2023-12-31</td>
+                                                                                <td>2023-12-31</td>
+                                                                                <td>Restaurant</td>
+                                                                            <td>
+                 <button class="orange-btn"  onclick="window.location.href='{% url 'dashboard:done-draws' %}'">
+                                                                                   <i class="fas fa-eye"></i> View
+                                                                                </button>
+                <button class="orange-btn">
+                    <i class="fas fa-download"></i> Extract
+                </button>
+            </td>
+                                                                            </tr>
+                                                                            <tr >
+                                                                                <td>
+                                                                                    <p class="checkbx">
+                                                                                        <input type="checkbox" id="c2"
+                                                                                            name="cb">
+                                                                                        <label for="c2">Lucky Draw 2</label>
+                                                                                    </p>
+                                                                                </td>
+                                                                                <td>120</td>
+                                                                                <td>2023-12-31</td>
+                                                                                <td>2023-12-31</td>
+                                                                                <td>Consumer</td>
+                                                                           <td>
+                                                                               <button class="orange-btn"  onclick="window.location.href='{% url 'dashboard:done-draws' %}'">
+                                                                                   <i class="fas fa-eye"></i> View
+                                                                                </button>
+                                                                                <button class="orange-btn">
+                    <i class="fas fa-download"></i> Extract
+                </button>
+                                                                           </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <ul class="pagination mt-3 justify-content-end pe-3">
+                                                                    <li class="page-item"><a class="page-link"
+                                                                            href="#">Previous</a></li>
+                                                                    <li class="page-item active"><a class="page-link"
+                                                                            href="#">1</a></li>
+                                                                    <li class="page-item"><a class="page-link"
+                                                                            href="#">2</a></li>
+                                                                    <li class="page-item"><a class="page-link"
+                                                                            href="#">3</a></li>
+                                                                    <li class="page-item"><a class="page-link"
+                                                                            href="#">Next</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- New Lucky draw Modal -->
+                            <div class="modal fade" id="newUser" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-3">
+                                            <h2 class="sub-heading">Create New Lucky Draw</h2>
+                                            <form action="">
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">Lucky Draw Name</label>
+                                                        <input type="text" id="luckydrawName" class="allinput w-100">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">No.of Winners</label>
+                                                        <input type="email" id="luckydrawparticipant" class="allinput w-100">
+                                                    </div>
+                                                </div>
+                                              <div class="row">
+  <div class="col-12 mt-3">
+    <label for="startDate" class="allLbl">Start Date</label>
+    <input type="date" id="startDate" name="startDate" class="allinput w-100">
+  </div>
+
+  <div class="col-12 mt-3">
+    <label for="endDate" class="allLbl">End Date</label>
+    <input type="date" id="endDate" name="endDate" class="allinput w-100">
+  </div>
+
+    <div class="col-12 mt-3">
+    <label for="endDate" class="allLbl">Select Type</label>
+ <select name="" id="type" class="allinput w-100">
+                                                            <option value="Consumer">Consumer</option>
+                                                           <option value="Restaurant">Restaurant</option>
+                                                            <option value="Bottler">Bottler</option>
+
+                                                        </select>   </div>
+</div>
+
+                                                <div class="row">
+                                                    <div class="col-12 text-end mt-3">
+                                                        <button class="orange-btn-3">Cancel</button>
+                                                        <button type="button " id="createLuckyDraw" class="orange-btn"
+                                                            data-bs-dismiss="modal" aria-label="Close">Create</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--New Lucky Draw Modal -->
+
+                                <!-- New Edit  draw Modal -->
+                            <div class="modal fade" id="editLuckyDraw" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-3">
+                                            <h2 class="sub-heading">Edit Lucky Draw</h2>
+                                            <form action="">
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">Lucky Draw Name</label>
+                                                        <input type="text" id="luckydrawName" class="allinput w-100">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">No.of Winners</label>
+                                                        <input type="email" id="luckydrawparticipant" class="allinput w-100">
+                                                    </div>
+                                                </div>
+                                              <div class="row">
+  <div class="col-12 mt-3">
+    <label for="startDate" class="allLbl">Start Date</label>
+    <input type="date" id="startDate" name="startDate" class="allinput w-100">
+  </div>
+
+  <div class="col-12 mt-3">
+    <label for="endDate" class="allLbl">End Date</label>
+    <input type="date" id="endDate" name="endDate" class="allinput w-100">
+  </div>
+  <div class="col-12 mt-3">
+    <label for="endDate" class="allLbl">Select Type</label>
+ <select name="" id="type" class="allinput w-100">
+                                                            <option value="Consumer">Consumer</option>
+                                                           <option value="Restaurant">Restaurant</option>
+                                                            <option value="Bottler">Bottler</option>
+
+                                                        </select>   </div>
+</div>
+
+                                                <div class="row">
+                                                    <div class="col-12 text-end mt-3">
+                                                        <button class="orange-btn-3">Cancel</button>
+                                                        <button type="button " id="editLuckyDrawBtn" class="orange-btn"
+                                                            data-bs-dismiss="modal" aria-label="Close">Create</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Edit Lucky Draw Modal -->
+
+                            <!-- New Role Modal -->
+                            <div class="modal fade" id="newRole" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-3">
+                                            <h2 class="sub-heading">Create New Role</h2>
+                                            <form action="">
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">Role Name</label>
+                                                        <input type="text" class="allinput w-100">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">Description</label>
+                                                        <textarea name="" id="" cols="30" rows="5"
+                                                            class="allinput w-100"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h2 class="profileText my-3">Permissions</h2>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">Venue Management</h3>
+                                                        <p class=" checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t1" name="t1">
+                                                            <label for="t1">Manage venue information</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t2" name="t2">
+                                                            <label for="t2">Add new consumers</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t3" name="t3">
+                                                            <label for="t3">Edit existing consumers</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t4" name="t4">
+                                                            <label for="t4">Delete consumers</label>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">Game Management</h3>
+                                                        <p class=" checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t5" name="t5">
+                                                            <label for="t5">Manage game information</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t6" name="t6">
+                                                            <label for="t6">Add new games</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t7" name="t7">
+                                                            <label for="t7">Edit existing games</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t8" name="t8">
+                                                            <label for="t8">Remove games</label>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">Ticket Management</h3>
+                                                        <p class=" checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t9" name="t9">
+                                                            <label for="t9">View ticket information</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t10" name="t10">
+                                                            <label for="t10">Update restaurants status</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t11" name="t11">
+                                                            <label for="t11">Add new restaurants</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t12" name="t12">
+                                                            <label for="t12">Delete restaurants</label>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">User Management</h3>
+                                                        <p class=" checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t13" name="t13">
+                                                            <label for="t13">Manage user accounts</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t14" name="t14">
+                                                            <label for="t14">Add new users</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t15" name="t15">
+                                                            <label for="t15">Edit existing users</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t16" name="t16">
+                                                            <label for="t16">Delete users</label>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">Role Management</h3>
+                                                        <p class=" checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t17" name="t17">
+                                                            <label for="t17">Manage role permissions</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t18" name="t18">
+                                                            <label for="t18">Add new roles</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t19" name="t19">
+                                                            <label for="t19">Edit existing roles</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t20" name="t20">
+                                                            <label for="t20">Delete roles</label>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">Report Generation</h3>
+                                                        <p class=" checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t21" name="t21">
+                                                            <label for="t21">Generate reports on system activity</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t22" name="t22">
+                                                            <label for="t22">View statistical data</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t23" name="t23">
+                                                            <label for="t23">Export reports in various formats</label>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">Vendor Management</h3>
+                                                        <p class=" checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t25" name="t25">
+                                                            <label for="t25">Manage vendor accounts</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t26" name="t26">
+                                                            <label for="t26">Add new vendors</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t27" name="t27">
+                                                            <label for="t27">Edit existing vendors</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t28" name="t28">
+                                                            <label for="t28">Remove vendors</label>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">System Configuration</h3>
+                                                        <p class=" checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t29" name="t29">
+                                                            <label for="t29">Configure system settings</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t30" name="t30">
+                                                            <label for="t30">Customize system perferences</label>
+                                                        </p>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t31" name="t31">
+                                                            <label for="t31">Manage system integrations</label>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="modalsubheading">Customer Support</h3>
+                                                        <p class="checkbx checkbx2 mt-2">
+                                                            <input type="checkbox" id="t24" name="t24">
+                                                            <label for="t24">Respond to user inquiries</label>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 text-end mt-3">
+                                                        <button class="orange-btn-3">Cancel</button>
+                                                        <button type="button " class="orange-btn"
+                                                            data-bs-dismiss="modal" aria-label="Close">Create</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--New Role Modal -->
+
+                            <!--footer start here-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="{% static 'dashboard/js/lucky-draw.js' %}"></script>
+</body>
+
+</html>
+
+<!--footer end here-->

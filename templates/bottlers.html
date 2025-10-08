@@ -1,0 +1,436 @@
+{% load static %}
+<!DOCTYPE html><html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="images/pepsi logo.png' %}" type="image/ico" sizes="32x32">
+    <title> Pepsico-Bottlers  </title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+</head>
+
+<body>
+    <header>
+        <!-- <div class="container-fluid"> -->
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md headerNav">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="{% url 'dashboard:index' %}">
+                                <img src="{% static 'dashboard/assets/images/pepsi logo.png' %}" alt="" loading="lazy" class="brand-logo">
+                            </a>
+
+
+                                        <h1 class="text-white " style="font-size:24px;font-weight:bold" >Pepsi Premium Club</h1>
+
+
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ms-auto align-items-md-center align-items-end">
+                                    
+                                    <li class="nav-item">
+                                        <div class="dropdown-center">
+                                            <button class="dropdown-toggle d-flex align-items-center userDrp"
+                                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="{% static 'dashboard/assets/images/avatar.png' %}" alt="avatar" class="userAvatar">
+                                                <span class="userName">{{username}}</span>
+                                            </button>
+                                           
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        <!-- </div> -->
+    </header>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex">
+                        <div class="sideNav marginTopAll">
+                            <ul class="mb-lg-5">
+
+                                <li>
+                                    <a href="{% url 'dashboard:index' %}" >
+                                        <img src="{% static 'dashboard/assets/images/analysis.png' %}" />
+                                        &nbsp; &nbsp;Analytics</a>
+                                </li>
+
+    <li>
+                                                          <a href="{% url 'dashboard:bottler' %}" id="unittab" class="active position-relative d-flex align-items-center">
+                                    <img src="{% static 'dashboard/assets/images/factory.png' %}" />
+                                            
+                                            &nbsp; &nbsp;Users
+                                           <!-- <img src="{% static 'dashboard/assets/images/down-arrow.png' %}" width="18" id="arrowIcon" class="unit-arrow" /> -->
+                                                
+
+                                    </a>
+                                        <!-- <ul id="submenu" class="submenu">
+                                            <li id="GM-tab-btn" class="submenu-item submenuactive" >GM</li>
+                                            <li id="RSM-tab-btn" class="submenu-item" >RSM</li>
+
+                                          </ul> -->
+                                </li>
+
+<li>
+                                    <a href="{% url 'dashboard:restaurant' %}" class="d-flex align-items-center">
+                                        <img src="{% static 'dashboard/assets/images/restaurant.png' %}" />
+                                        &nbsp; &nbsp;Restaurants</a>
+                                </li>
+
+                            
+
+
+                                
+
+           {% if  user.is_superuser %}                   
+                                
+ <li>
+                                    <a href="{% url 'dashboard:lucky-draw' %}">
+                                       <img src="{% static 'dashboard/assets/images/ticket.png' %}" />
+                                &nbsp; &nbsp;Lucky Draw</a>
+                                </li>
+                                {% endif %}
+                                <li>
+                                                                    <a href="{% url 'dashboard:report' %}">
+                                                                       <img src="{% static 'dashboard/assets/images/report.png' %}" />
+                                                &nbsp; &nbsp;Report</a>
+                                                                </li>
+                                <!-- <li>
+                                    <a href="support.html">
+                                        <svg class="svgNavIcon" viewBox="0 0 25 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12.5 2C6.986 2 2.5 6.486 2.5 12V16.143C2.5 17.167 3.397 18 4.5 18H5.5C5.76522 18 6.01957 17.8946 6.20711 17.7071C6.39464 17.5196 6.5 17.2652 6.5 17V11.857C6.5 11.5918 6.39464 11.3374 6.20711 11.1499C6.01957 10.9624 5.76522 10.857 5.5 10.857H4.592C5.148 6.987 8.478 4 12.5 4C16.522 4 19.852 6.987 20.408 10.857H19.5C19.2348 10.857 18.9804 10.9624 18.7929 11.1499C18.6054 11.3374 18.5 11.5918 18.5 11.857V18C18.5 19.103 17.603 20 16.5 20H14.5V19H10.5V22H16.5C18.706 22 20.5 20.206 20.5 18C21.603 18 22.5 17.167 22.5 16.143V12C22.5 6.486 18.014 2 12.5 2Z" />
+                                        </svg>
+                                        Support</a>
+                                </li> -->
+                            </ul>
+
+
+                            <ul class="mt-lg-5">
+                                
+
+
+                                <li>
+                                    <a  href="#" id="logoutBtn">
+                                        <svg class="svgNavIcon" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.0005 3H11.0005V13H13.0005V3ZM17.8305 5.17L16.4105 6.59C18.0505 7.91 19.0005 9.9 19.0005 12C19.0005 13.8565 18.263 15.637 16.9502 16.9497C15.6375 18.2625 13.857 19 12.0005 19C8.14046 19 5.00046 15.88 5.00046 12C5.00046 9.91 5.95046 7.91 7.58046 6.58L6.17046 5.17C2.38046 8.39 1.92046 14.07 5.14046 17.86C8.36046 21.64 14.0405 22.1 17.8305 18.88C19.8505 17.17 21.0005 14.65 21.0005 12C21.0005 9.37 19.8405 6.87 17.8305 5.17Z" />
+                                        </svg>Logout</a>
+                                </li>
+
+
+                               
+                            </ul>
+                        </div>
+                        <div class="contentArea">
+                            <button class="open-btn hidden" onclick="toggleSideNav()"><i
+                                    class="fas fa-angle-right"></i></button>
+
+<!-- GM table -->
+                            <section  id="GMtab"  class="marginTopAll">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+    <form method="get" class="position-relative">
+        <input type="text" class="all-search w-100" name="q" value="{{ search_query }}" placeholder="Search">
+        <button class="searchIcon2" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </form>
+</div>
+
+                                        <!-- <div class="offset-md-2 col-md-6 mt-md-0 mt-3 text-end">
+                                            <button class="orange-btn"  data-bs-toggle="modal"
+                                                data-bs-target="#newGM" aria-label="New GM">
+                                                <i class="fas fa-plus me-2"></i>New GM
+                                            </button>
+                                        </div> -->
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="border-box marginTopAll px-0">
+                                                <div class="table-responsive mt-3">
+                                                    <table class="table dataTable">
+                                                        <thead>
+                                                            <th>
+                                                                <p class="checkbx">
+                                                                    <label for="c1">Name </label>
+                                                                </p>
+                                                            </th>
+                                                            <th>Contact no</th>
+                                                            <th>Bottler </th>
+                                                            <th>Designation</th>
+                                                            <th>Cases Sales Target</th>
+                                                            {% comment %} <th>Compliance Target</th> {% endcomment %}
+                                                            <th>Consumer Engagement Target</th>
+                                                            <th>Compliance Target</th>
+                                                            <th>Actions</th>
+                                                        </thead>
+                                                        
+                                                        
+                                                        <tbody>
+    {% for obj in page_obj %}
+        {% if obj.gm_name %}
+            <!-- GM Row -->
+            <tr>
+                <td>
+                    <p class="checkbx">
+                        <input type="checkbox" id="c2" name="cb">
+                        <label for="c2">{{ obj.gm_name }}</label>
+                    </p>
+                </td>
+                <td>{{ obj.gm_phone_number }}</td>
+                <td>{{ obj.bottler.bottler_name }}</td>
+                <td>{{obj.user.profile.role}}</td>
+                <td>{{ obj.gm_bottle_crate_target }}</td>
+                <td>{{ obj.gm_consumer_target }}</td>
+                <td>{{obj.gm_compliance_target}}%</td>
+                <td>
+                    {% if user.id  == obj.id %}
+                    <button class="blue-btn" onclick="window.location.href='{% url 'dashboard:detail-gm' obj.id %}'">
+                        <i class="fas fa-eye"></i> View
+                    </button>
+                    {% else %}
+                      <button class="blue-btn" onclick="window.location.href='{% url 'dashboard:detail-gm' obj.id %}'">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% elif obj.rsm_name %}
+            <!-- RSM Row -->
+            <tr>
+                <td>
+                    <p class="checkbx">
+                        <input type="checkbox" id="c2" name="cb">
+                        <label for="c2">{{ obj.rsm_name }}</label>
+                    </p>
+                </td>
+                <td>{{ obj.rsm_phone_number }}</td>
+                <td>{{ obj.bottler.bottler_name }}</td>
+                <td>{{obj.user.profile.role}}</td>
+                <td>{{ obj.rsm_bottle_crate_target }}</td>
+                <td>{{ obj.rsm_consumer_target }}</td>
+                <td>{{obj.rsm_compliance_target}}%</td>
+                <td>
+                    {% if user.id == obj.user.id %}
+                       <button class="blue-btn" onclick="window.location.href='{% url 'dashboard:detail-rsm' obj.id %}'">
+                        <i class="fas fa-eye"></i> View
+                    </button>
+                    {% else %}
+                    <button class="blue-btn" onclick="window.location.href='{% url 'dashboard:detail-rsm' obj.id %}'">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</tbody>
+
+                                                    </a>
+                                                    </table>
+                                                </div>
+                       <ul class="pagination mt-3 justify-content-end pe-3">
+    {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+        </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+            <a class="page-link" href="?q={{ search_query }}&page={{ num }}">{{ num }}</a>
+        </li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?q={{ search_query }}&page={{ page_obj.next_page_number }}">Next</a>
+        </li>
+    {% endif %}
+</ul>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                
+                      
+                                <div class="modal fade" id="newGM" tabindex="-1"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-3">
+                                            <h2 class="sub-heading">Create New GM</h2>
+                                            <form action="">
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">Name</label>
+                                                        <input type="text" id="GMname" class="allinput w-100">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">Contact no</label>
+                                                       <input type="number" id="GMcontactno" class="allinput w-100">
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Bottler</label>
+                                                   <select name="" id="bottler" class="allinput w-100">
+                                                            <option value="Bottler1">Bottler1</option>
+                                                           <option value="Bottler2">Bottler2</option>
+                                                            <option value="Bottler3">Bottler3</option>
+
+                                                        </select>   
+
+                                                    </div>
+                                          
+                                                <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">RSM</label>
+                                                   <select name="" id="rsm" class="allinput w-100">
+                                                            <option value="RSM1">RSM1</option>
+                                                           <option value="RSM2">RSM2</option>
+                                                            <option value="RSM3">RSM3</option>
+
+                                                        </select>   
+
+                                                    </div>
+                                                
+                                                <div class="col-lg-6 mt-3">
+                                                    <label for="" class="allLbl">Restaurant</label>
+   <select name="" id="restaurant" class="allinput w-100">
+                                                            <option value="Restaurant1">Restaurant1</option>
+                                                           <option value="Restaurant2">Restaurant2</option>
+                                                            <option value="Restaurant3">Restaurant3</option>
+
+                                                        </select>                                                       
+                                                </div>
+                                                    <div class="col-6 mt-3">
+                                                        <label for="" class="allLbl">Target</label>
+                                                       <input type="text" id="target" class="allinput w-100">
+
+                                                    </div>
+                                            </div>
+                                                <div class="row">
+                                                    <div class="col-12 text-end mt-3">
+                                                        <button class="orange-btn-3">Cancel</button>
+                                                        <button type="button " id="createGmBtn" class="orange-btn"
+                                                            data-bs-dismiss="modal" aria-label="Close">Create</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                    <div class="modal fade" id="newRSM" tabindex="-1"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-3">
+                                            <h2 class="sub-heading">Create New RSM</h2>
+                                            <form action="">
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">Name</label>
+                                                        <input type="text" id="rsmname" class="allinput w-100">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 mt-3">
+                                                        <label for="" class="allLbl">Contact no</label>
+                                                       <input type="number" id="rsmcontactno" class="allinput w-100">
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">Bottler</label>
+                                                   <select name="" id="rsmbottler" class="allinput w-100">
+                                                            <option value="Platinum">Bottler1</option>
+                                                           <option value="Gold">Bottler2</option>
+                                                            <option value="Silver">Bottler3</option>
+
+                                                        </select>   
+
+                                                    </div>
+                                          
+                                                <div class="col-lg-6 mt-3">
+                                                        <label for="" class="allLbl">GM</label>
+                                                   <select name="" id="taggedgm" class="allinput w-100">
+                                                            <option value="Platinum">GM1</option>
+                                                           <option value="Gold">GM2</option>
+                                                            <option value="Silver">GM3</option>
+
+                                                        </select>   
+
+                                                    </div>
+                                                
+                                                <div class="col-lg-6 mt-3">
+                                                    <label for="" class="allLbl">Restaurant</label>
+                                                    <select name="" id="taggedrsmrestaurant" class="allinput w-100">
+                                                            <option value="Platinum">Restaurant1</option>
+                                                           <option value="Gold">Restaurant2</option>
+                                                            <option value="Silver">Restaurant3</option>
+
+                                                        </select>                                                       
+                                                </div>
+                                                    <div class="col-6 mt-3">
+                                                        <label for="" class="allLbl">Target</label>
+                                                       <input type="text" id="rsmtarget" class="allinput w-100">
+
+                                                    </div>
+                                            </div>
+                                                <div class="row">
+                                                    <div class="col-12 text-end mt-3">
+                                                        <button class="orange-btn-3">Cancel</button>
+                                                        <button type="button " id="createRsmBtn" class="orange-btn"
+                                                            data-bs-dismiss="modal" aria-label="Close">Create</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="{% static 'dashboard/js/bottlers.js' %}"></script>
+ 
+</body>
+
+</html>
+
+<!--footer end here-->

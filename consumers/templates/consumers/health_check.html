@@ -1,0 +1,86 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pepsico - Health Check</title>
+  <link rel="shortcut icon" type="image/png" href="{% static '/assets/images/logos/lays_logo.png'%}" />
+  <link rel="stylesheet" href="{% static '/assets/css/styles.min.css'%}" />
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      color: '#fff';
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+
+<body data-bs-theme="light">
+  <div class="page-wrapper" id="main-wrapper">
+    <div class="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8">
+            <div class="card mb-0" style="background: none; box-shadow: none;">
+              <h1>API Usage Logs</h1>
+
+              <table id="data_table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>API Path</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>Response Time (s)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="6">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card mb-0" style="background: none; box-shadow: none;">
+              <br>
+              <h2>Graphs</h2>
+              <canvas id="statusCodeChart" width="800" height="250"></canvas>
+              <canvas id="responseTimeChart" width="800" height="250"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'consumer/js/healthcheck.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html><html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{% static 'dashboard/assets/images/pepsi logo.png' %}" type="image/ico" sizes="32x32">
+    <title> Pepsico | Login</title>
+    <!-- Css only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}" />
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <div class="logo-container"><a href="/">
+                <img src="{% static 'dashboard/assets/images/pepsi logo.png' %}" alt="" loading="lazy" class="login-brand-logo">
+            </a>
+        </div>
+        <form action="" id="loginbtn" method="post" >
+             {% csrf_token %}
+            <label class="login-group" style="position: relative;">
+Username
+                <input class="login-input" type="text" required name="username" placeholder="Username" id="username" />
+            </label>
+            <label class="login-group" style="position: relative;">
+                Password
+                <input class="login-input" required type="password" name="password" placeholder="Password" id="password" />
+                <i id="toggleIcon" class="fas fa-eye-slash" onclick="togglePasswordVisibility()"></i>
+            </label>
+            <!-- <a href="" ><p class="fptext float-end">Forgot password?</p></a> -->
+            <p class="error-text" id="error" ></p>
+
+    <button type="submit" class="login-btn">Login</button>
+
+          
+
+        </form>
+        <div class="modal fade" id="loginsuccessModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body p-3">
+                        <center><img src="{% static 'dashboard/assets/images/check.png' %}" alt="Success Icon" /></center>
+                        <h1 id="loginsuccess" class="success-text" style="text-align:center;padding-top:10px;font-size:24px;">
+                          
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="loginerrorModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body p-3">
+                        <center><img src="{% static 'dashboard/assets/images/multiply.png' %}" alt="Success Icon" /></center>
+                        <h1 id="loginerror" class="error-text" style="text-align:center;padding-top:10px;font-size:24px;">
+                          
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'dashboard/js/login.js' %}"></script>  
+
+</body>
+
+</html>

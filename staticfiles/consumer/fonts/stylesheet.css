@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Pepsi Owners 2';
+    src: url('PepsiOwners2-Extended220909.eot');
+    src: local('PepsiOwners2Extended220909'), local('PepsiOwners2-Extended220909'),
+        url('PepsiOwners2-Extended220909.eot?#iefix') format('embedded-opentype'),
+        url('PepsiOwners2-Extended220909.woff2') format('woff2'),
+        url('PepsiOwners2-Extended220909.woff') format('woff'),
+        url('PepsiOwners2-Extended220909.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pepsi Owners 2';
+    src: url('PepsiOwners2-Regular220909.eot');
+    src: local('PepsiOwners2Regular220909'), local('PepsiOwners2-Regular220909'),
+        url('PepsiOwners2-Regular220909.eot?#iefix') format('embedded-opentype'),
+        url('PepsiOwners2-Regular220909.woff2') format('woff2'),
+        url('PepsiOwners2-Regular220909.woff') format('woff'),
+        url('PepsiOwners2-Regular220909.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pepsi Owners 2';
+    src: url('PepsiOwners2-Compressed220909.eot');
+    src: local('PepsiOwners2Compressed220909'), local('PepsiOwners2-Compressed220909'),
+        url('PepsiOwners2-Compressed220909.eot?#iefix') format('embedded-opentype'),
+        url('PepsiOwners2-Compressed220909.woff2') format('woff2'),
+        url('PepsiOwners2-Compressed220909.woff') format('woff'),
+        url('PepsiOwners2-Compressed220909.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+

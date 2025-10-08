@@ -1,0 +1,729 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pepsi Restaurant</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</head>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          monserrat: ['Montserrat'],
+        },
+      },
+    },
+  }
+</script>
+<style>
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid transparent;
+    border-top-color: #C6A75F;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+
+  .swal-scroll {
+    max-height: 200px;
+    overflow-y: auto;
+
+  }
+
+
+  /* Animations */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes slideToCenter {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .icon2 {
+    filter: brightness(0);
+  }
+
+  .icon {
+    filter: brightness(0) invert(1);
+  }
+
+
+  /* hidding inputs spinners */
+  /* Chrome, Safari, Edge */
+  .otp-input::-webkit-inner-spin-button,
+  .otp-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  .otp-input {
+    -moz-appearance: textfield;
+  }
+
+  /* ===================Circular Chart=================== */
+  .chart-two {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    top: 10%;
+    position: relative;
+
+  }
+
+  .chart-two.animate svg .circle-foreground {
+    animation: offset 3s ease-in-out forwards;
+    animation-delay: 1s;
+  }
+
+  .chart-two.animate figcaption:after {
+    animation: chart-two-label 3s steps(100) forwards;
+    animation-delay: 1s;
+  }
+
+  .chart-two svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .chart-two svg .circle-background {
+    r: 92.5px;
+    /* (200px - 15px) / 2 */
+    cx: 50%;
+    cy: 50%;
+    fill: none;
+    stroke: #c6a75f38;
+    stroke-width: 15px;
+  }
+
+  .chart-two svg .circle-foreground {
+    r: 92.5px;
+    cx: 50%;
+    cy: 50%;
+    fill: none;
+    stroke: #C6A75F;
+    stroke-width: 15px;
+    stroke-linecap: round;
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg);
+
+    /* dynamic percentage calculation */
+    stroke-dasharray: calc(581 * 0.10) calc(581 * 0.80);
+    /* 75% visible */
+    stroke-dashoffset: 0;
+  }
+
+  .chart-two figcaption {
+    display: inline-block;
+    width: 100%;
+    height: 2.5rem;
+    overflow: hidden;
+    text-align: center;
+    color: black;
+    position: absolute;
+    top: calc(48% - 1.25rem);
+    left: 0;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  .chart-two figcaption:after {
+
+    display: inline-block;
+    color: black;
+    white-space: pre;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+
+  }
+
+  @keyframes chart-two-label {
+    100% {
+      transform: translateY(calc(-2.5rem * 100));
+    }
+  }
+
+  @keyframes offset {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+
+  /* Swal button color */
+  .swal-gradient-btn {
+    background: linear-gradient(140deg, rgba(163, 137, 77, 1) 0%, rgba(214, 187, 122, 1) 53%, rgba(163, 137, 77, 1) 100%);
+    color: white;
+    border: 2px solid #C6A75F;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .swal-gradient-btn:hover {
+    background: black;
+    color: #C6A75F;
+  }
+</style>
+
+<body class="bg-black flex items-center  justify-center min-h-screen font-monserrat">
+
+
+  </div>
+  <!-- Screen 0: Intro -->
+  {% comment %} <div id="screen0" class="w-full   max-w-md text-center p-6">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-10 right-3 top-1" />
+    </div>
+    {% csrf_token %}
+    <img src="{% static 'restaurant/assets/images/Premium.png' %} " alt="Pepsi Logo"
+      class="mx-auto object-contain mb-12 w-44">
+    <input inputmode="numeric" pattern="[0-9]*" type="number" id="numberInput" placeholder="ENTER NUMBER"
+      class="w-full border-2 border-[#C6A75F] text-xl  font-semibold placeholder-white text-white p-3 rounded-[5px] mb-4 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#C6A75F] no-spinner" />
+    <button id="loginButton"
+      class="bg-[#C6A75F] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] hover:bg-black hover:text-[#C6A75F] transition">
+      LOGIN
+    </button>
+  </div> {% endcomment %}
+
+  <!-- Screen 1: Camera -->
+  {% comment %} <div id="screen1" class=" w-full hidden  max-w-md text-center p-6">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-12 right-3 top-1" />
+    </div>
+    <img src="{% static 'restaurant/assets/images/Premium.png' %} " alt="Pepsi Logo"
+      class="mx-auto object-contain mb-12 w-44">
+    <div id="otpSection" class="w-full max-w-md text-center p-6">
+      <h2 class="text-white text-xl font-semibold mb-4">Enter 6-Digit OTP</h2>
+      <div class="flex justify-center gap-3 mb-6">
+        <input type="number" maxlength="1"
+          class="otp-input w-12 h-12 text-center text-white bg-transparent border-2 border-[#C6A75F] rounded-[5px] text-xl focus:outline-none focus:ring-2 focus:ring-[#C6A75F] no-spinner" />
+        <input type="number" maxlength="1"
+          class="otp-input w-12 h-12 text-center text-white bg-transparent border-2 border-[#C6A75F] rounded-[5px] text-xl focus:outline-none focus:ring-2 focus:ring-[#C6A75F] " />
+        <input type="number" maxlength="1"
+          class="otp-input w-12 h-12 text-center text-white bg-transparent border-2 border-[#C6A75F] rounded-[5px] text-xl focus:outline-none focus:ring-2 focus:ring-[#C6A75F] " />
+        <input type="number" maxlength="1"
+          class="otp-input w-12 h-12 text-center text-white bg-transparent border-2 border-[#C6A75F] rounded-[5px] text-xl focus:outline-none focus:ring-2 focus:ring-[#C6A75F] " />
+
+      </div>
+      <button id="verifyOtpButton"
+        class="bg-[#C6A75F] font-bold text-xl  text-white w-full py-3 rounded-[5px] shadow-md border-2 border-[#C6A75F] hover:bg-black hover:text-[#C6A75F] transition">
+        VERIFY OTP
+      </button>
+    </div>
+  </div> {% endcomment %}
+
+  <!-- Screen 2: Input Form -->
+  <div id="screen2" class=" w-full   max-w-md min-h-screen text-center p-2  ">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-10 right-3 top-1" />
+    </div>
+
+    <div class="w-full   py-3 rounded-lg mt-12 ">
+      <div class="flex flex-row items-center gap-x-2 items-start p-2">
+        <img src="{% static 'restaurant/assets/images/restaurant.png' %}" class="object-contain w-8 h-8 icon"
+          alt="Restaurant Image">
+        <p class="text-white text-2xl">{{restaurant.restaurant_name}}</p>
+      </div>
+
+
+    </div>
+
+
+
+
+    <div class="w-full   h-fit mt-2 rounded-lg">
+      {% comment %} <div onclick="goToScreen(9)"
+        class=" w-full bg-[#C6A75F] text-white py-3 rounded-[5px]  mt-4 border-2 border-[#C6A75F] hover:bg-black hover:text-[#C6A75F] transition">
+        <div class="flex flex-row items-center justify-between px-2 py-1">
+          <img src="{% static 'restaurant/assets/images/crate.png' %}" alt="Download QR" class="w-12 h-12">
+          <p class="text-xl font-bold">Input Cases Purchased</p>
+        </div>
+      </div> {% endcomment %}
+
+      <p class="text-2xl text-white font-medium text-start my-2">OVERALL TARGET FOR THIS MONTH</p>
+      <div id="overalltgtBtn"
+        class="w-full mb-4 bg-white border-2 border-[#C6A75F] h-[250px] rounded-[5px] flex items-center justify-center relative">
+
+        <div style="width:200px; height:200px; position:relative;">
+          <canvas id="myDonutChart"></canvas>
+          <div style="
+        position:absolute;
+        top:50%; left:50%;
+        transform:translate(-50%,-50%);
+        font-size:20px;
+        font-weight:bold;
+        color:#000;
+      ">
+            <span class="text-4xl" id="over_all_target">{{overall_target_achieved}}</span>%
+          </div>
+        </div>
+
+      </div>
+
+      <p class="text-2xl text-white font-medium text-start my-2">TARGETS</p>
+
+      <div id="bottleBtn"
+        class="w-full  rounded-[5px]  mb-4  bg-[#C6A75F]/25 border-2 border-[#C6A75F] flex flex-row justify-between items-center">
+        <div class="flex-start items-start p-2 pt-3 ">
+          <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center">
+            <img  src="{% static 'restaurant/assets/images/pepsiicon.png' %}" alt="Bottle"
+              class="w-16 icon h-16 object-contain">
+          </div>
+          <p class="text-lg text-white font-semibold text-start mt-3">Cases Purchased</p>
+
+        </div>
+
+        <div class="p-2 flex-end items-end justify-between gap-y-3 ">
+          <p class="text-white text-end items-start text-4xl font-semibold h-12">
+            {{bottle_crate_target}}/{{bottle_crates_total}}</p>
+          <p class="text-lg text-white text-end mt-3">Achieved Target</p>
+        </div>
+
+      </div>
+      <div id="consumerBtn"
+        class="w-full  rounded-[5px]   mb-4 bg-[#C6A75F]/25 border-2 border-[#C6A75F]  flex flex-row justify-between items-center">
+        <div class="flex-start items-start p-2 ">
+          <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center">
+            <img src="{% static 'restaurant/assets/images/user.png' %}" alt="Bottle"
+              class="w-10 icon h-10 ml-3 object-contain">
+          </div>
+          <p class="text-lg text-white font-semibold  text-start  mt-3">Consumer Bill Scan</p>
+
+        </div>
+
+        <div class="p-2 flex-end items-end justify-between gap-y-3 ">
+          <p class="text-white text-end items-start text-4xl font-semibold h-12">
+            {{consumer_target_achieved}}/{{consumer_total}}</p>
+          <p class="text-lg text-white text-end mt-3 ">Achieved Target</p>
+        </div>
+
+      </div>
+      <div id="complianceBtn"
+        class="w-full rounded-[5px]  bg-[#C6A75F]/25 border-2 border-[#C6A75F] flex flex-row justify-between items-center">
+        <div class="flex-start items-start p-2 ">
+          <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center">
+            <img src="{% static 'restaurant/assets/images/compliance.png' %}" alt="Bottle"
+              class="w-10 h-10 icon ml-3 object-contain">
+          </div>
+          <p class="text-lg text-white text-start font-semibold mt-3">Cooler and Branding Compliance</p>
+
+        </div>
+
+        <div class="p-2 flex-end items-end justify-between gap-y-3 ">
+          <p class="text-white text-end items-start text-3xl font-semibold h-12">
+            {{total_compliance_achieved}}/{{compliance_target_total}}</p>
+          <p class="text-lg text-white mt-3 text-end">Achieved Target in (%)</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 w-full h-[150px] mt-4">
+      <div id="coolerBtn"
+        class="w-full border-2 border-[#C6A75F] h-full bg-white rounded-[5px] flex flex-col items-center justify-between">
+        <img src="{% static 'restaurant/assets/images/fridge.png' %}" alt="Pepsi Logo"
+          class="mx-auto icon2 object-contain mx-auto mt-2 w-20">
+        <button id="captureButton"
+          class="bg-gradient-to-r from-[#a3894d] to-[#d6bb7a] text-white font-medium w-full py-2 shadow-md hover:brightness-110 transition">
+          Capture Cooler </button>
+      </div>
+      <div id="posmBtn"
+        class="w-full h-full border-2 border-[#C6A75F] bg-white rounded-[5px] flex flex-col items-center justify-between ">
+        <img src="{% static 'restaurant/assets/images//billboard.png' %}" alt="Pepsi Logo"
+          class="mx-auto icon2 object-contain mx-auto mt-2 w-20">
+        <button id="captureButton"
+          class="bg-gradient-to-r from-[#a3894d] to-[#d6bb7a] text-white font-medium w-full py-2 shadow-md hover:brightness-110 transition">
+          Capture POSM </button>
+      </div>
+
+    </div>
+
+
+    <div data-url="{{restaurant.restaurant_qr}}"
+      class="download-qr-wrapper bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] mt-4 hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+      <div class="flex flex-row items-center justify-between px-2 py-1">
+        {% if restaurant.restaurant_qr %}
+        <img src="{{restaurant.restaurant_qr}}" alt="Download QR" class="w-12 h-12">
+        {% else %}
+        <img src="{% static 'restaurant/assets/images/Qr.png' %}" alt="Download QR" class="w-12 h-12">
+        {% endif %}
+        <p class="text-xl font-bold">Download Restaurant QR</pclass=>
+      </div>
+    </div>
+
+    <div onclick="goToScreen(8)"
+      class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] mt-4 hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+      <div class="flex flex-row items-center justify-between px-2 py-1">
+        <img src="{% static 'restaurant/assets/images/benefit.png' %}" alt="Download QR" class="w-12 h-12">
+        <p class="text-xl font-bold">View Rewards</p>
+      </div>
+    </div>
+
+    <div id="logoutbtn"
+      class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] mt-4 hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+      <div class="flex flex-row items-center justify-between px-2 py-1">
+        <img src="{% static 'restaurant/assets/images/turn-off.png' %}" alt="Download QR" class="w-12 h-12">
+        <p class="text-xl font-bold">Logout</p>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- Screen 3: Cooler Selection -->
+  <div id="screen3" class=" w-full hidden max-w-md  flex flex-col items-start  p-2 ">
+
+
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-10 right-3 top-1" />
+    </div>
+
+
+    <img id="coolerBack" src="{% static 'restaurant/assets/images/back-button.png' %}" alt="backbtn"
+      class="absolute top-16 left-2  object-contain w-12 h-12">
+
+
+    <div class="w-full mt-28">
+      <p class="text-2xl text-white font-medium text-start my-2">Available Coolers</p>
+      <select id="coolerSelect" name="cooler" required
+        class="w-full border-2 border-[#C6A75F] text-white bg-transparent p-3 rounded-[5px] mb-2 focus:outline-none focus:ring-2 focus:ring-[#C6A75F]">
+        <option value="" disabled selected class="bg-black text-white">Select Cooler</option>
+        {% for cooler in coolers %}
+        <option value="{{cooler}}" class="bg-black text-white">{{cooler}}</option>
+        {% comment %} <option value="cooler2" class="bg-black text-white">Cooler 2</option>
+        <option value="cooler3" class="bg-black text-white">Cooler 3</option> {% endcomment %}
+        {% endfor %}
+      </select>
+
+
+      <div
+        class="border-2 border-[#C6A75F] rounded-[5px] h-[480px] w-full flex items-center justify-center mb-4 bg-white relative overflow-hidden mt-2">
+        <img id="" src="{% static 'restaurant/assets/images/SAX-400.png' %}" alt="Cooler"
+          class="absolute  object-contain w-full h-full">
+
+        <img id="SAX-400" src="{% static 'restaurant/assets/images/SAX-400.png' %}" alt="Cooler"
+          class="absolute hidden object-contain w-full h-full">
+        <img id="SAX-550" src="{% static 'restaurant/assets/images/SAX-550.png' %}" alt="Cooler"
+          class="absolute hidden object-contain w-full h-full">
+        <img id="SAX-650" src="{% static 'restaurant/assets/images/SAX-650.png' %}" alt="Cooler"
+          class="absolute hidden object-contain w-full h-full">
+        <img id="SAX-1000" src="{% static 'restaurant/assets/images/SAX-1000.png' %}" alt="Cooler"
+          class="absolute hidden object-contain w-full h-full">
+
+
+      </div>
+
+      <button id="proccedButton"
+        class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+        PROCEED
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Screen 4: Cooler Image-->
+
+  <div id="screen4" class="hidden  w-full max-w-md text-center p-6">
+
+
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-10 right-3 top-1" />
+    </div>
+
+    <img id="coolerCameraBack" src="{% static 'restaurant/assets/images/back-button.png' %}" alt="backbtn"
+      class="absolute top-16 left-2  object-contain w-12 h-12">
+
+    <div class="h-[70vh] flex items-center justify-center mb-6 bg-white relative overflow-hidden mt-24">
+      <img id="SAX-400-GRID" src="{% static 'restaurant/assets/images/SAX-400-GRID.png' %}" alt="Cooler"
+        class="absolute hidden w-full h-full">
+      <img id="SAX-550-GRID" src="{% static 'restaurant/assets/images/SAX-550-GRID.png' %}" alt="Cooler"
+        class="absolute hidden w-full h-full">
+      <img id="SAX-650-GRID" src="{% static 'restaurant/assets/images/SAX-650-GRID.png' %}" alt="Cooler"
+        class="absolute hidden w-full h-full">
+      <img id="SAX-1000-GRID" src="{% static 'restaurant/assets/images/SAX-1000-GRID.png' %}" alt="Cooler"
+        class="absolute hidden w-full h-full">
+      <video id="cameraFeed" autoplay playsinline class="hidden w-full h-full object-cover "></video>
+      <p id="cameraText" class="text-[#C6A75F] font-semibold">Camera / Picture Area</p>
+    </div>
+
+    <button id="coolerPicSubmitBtn"
+      class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+      SUBMIT PICTURE
+    </button>
+
+  </div>
+
+
+
+
+
+  <!-- Screen 5: POSM Selection -->
+
+  <div id="screen5" class="w-full hidden max-w-md flex flex-col items-start p-2">
+    <div class="w-full max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-10 right-3 top-1" />
+    </div>
+    <img onclick="goToScreen(2)" src="{% static 'restaurant/assets/images/back-button.png' %}" alt="backbtn"
+      class="absolute top-16 left-2 object-contain w-12 h-12">
+
+    <div class="w-full mt-28">
+      <p class="text-2xl text-white font-medium text-start my-2">Available POSM</p>
+      <select id="posmSelect"
+        class="w-full border-2 border-[#C6A75F] text-white bg-transparent p-3 rounded-[5px] mb-4 focus:outline-none focus:ring-2 focus:ring-[#C6A75F]">
+        <option value="" disabled selected class="bg-black text-white">Select POSM</option>
+        {% for posm in posms %}
+        <option value="{{posm}}" class="bg-black text-white">{{posm}}</option>
+        {% comment %} <option value="cooler2" class="bg-black text-white">Cooler 2</option>
+        <option value="cooler3" class="bg-black text-white">Cooler 3</option> {% endcomment %}
+        {% endfor %}
+
+      </select>
+
+      <div
+        class="border-2 border-[#C6A75F] rounded-[5px] h-[480px] w-full flex items-center justify-center mb-4 bg-white relative overflow-hidden mt-2">
+        <img id="Posm0" src="{% static 'restaurant/assets/images/posm1planaogram.jpg' %}" alt="Cooler"
+          class="absolute  object-contain w-full h-full">
+        <img id="Posm1" src="{% static 'restaurant/assets/images/posm1planaogram.jpg' %}" alt="posm1"
+          class="absolute hidden object-contain w-full h-full">
+        <img id="Posm2" src="{% static 'restaurant/assets/images/posm2planaogram.jpg' %}" alt="posm2"
+          class="absolute hidden object-contain w-full h-full">
+        <img id="Posm3" src="{% static 'restaurant/assets/images/posm3planaogram.jpg' %}" alt="posm3"
+          class="absolute hidden object-contain w-full h-full">
+
+
+      </div>
+
+
+
+      <button id="proccedButtonPosm"
+        class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+        PROCEED
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- Screen 6: POSM Image-->
+
+  <div id="screen6" class=" w-full hidden  max-w-md text-center p-6">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-10 right-3 top-1" />
+    </div>
+
+    <img id="posmCameraBack" src="{% static 'restaurant/assets/images/back-button.png' %}" alt="backbtn"
+      class="absolute top-16 left-2  object-contain w-12 h-12">
+    <div class="h-[70vh] flex items-center justify-center mb-6 bg-white relative overflow-hidden mt-24">
+      <img id="posm1" src="{% static 'restaurant/assets/images/posm1.png' %}" alt="posm"
+        class="absolute hidden w-full h-full">
+      <img id="posm2" src="{% static 'restaurant/assets/images/posm2.png' %}" alt="posm"
+        class="absolute hidden w-full h-full">
+      <img id="posm3" src="{% static 'restaurant/assets/images/posm3.png' %}" alt="posm"
+        class="absolute hidden w-full h-full">
+      <video id="cameraFeed2" autoplay playsinline class="hidden w-full h-full object-cover "></video>
+      <p id="cameraText2" class="text-[#C6A75F] font-semibold">Camera / Picture Area</p>
+    </div>
+    <button id="posmPicSubmitBtn" onclick=""
+      class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F]  hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+      SUBMIT PICTURE
+    </button>
+  </div>
+
+
+  <!--Screen 7: Cooler Result -->
+  <div id="screen7" class=" w-full hidden  max-w-md text-center p-6">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-10 right-3 top-1" />
+    </div>
+    <img onclick="goToScreen(2)" src="{% static 'restaurant/assets/images/back-button.png' %}" alt="backbtn"
+      class="absolute top-16 left-2  object-contain w-12 h-12">
+    <p id="resultcompliance" class="text-3xl text-white mb-6 font-medium"></p>
+    <button id="manualReviewBtn"
+      class="bg-[linear-gradient(140deg,_rgba(163,137,77,1)_0%,_rgba(214,187,122,1)_53%,_rgba(163,137,77,1)_100%)] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F]  hover:bg-black hover:bg-none hover:text-[#C6A75F] transition">
+      REQUEST MANNUAL REVIEW
+    </button>
+  </div>
+
+
+  <!--Screen 9: Reward Screen -->
+  <div id="screen8" class=" w-full  hidden  max-w-md p-6">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute  object-contain w-10 right-3 top-1" />
+    </div>
+    <img onclick="goToScreen(2)" src="{% static 'restaurant/assets/images/back-button.png' %}" alt="backbtn"
+      class="absolute top-16 left-2  object-contain w-12 h-12">
+
+
+    <div class="mt-28">
+      <p class="text-2xl text-white font-medium text-start my-2">Achievement Based Voucher</p>
+      <div id="voucherContainer">
+
+      </div>
+
+
+
+
+      <p class="text-2xl text-white font-medium text-start my-2">Lucky Draw Rewards</p>
+      <div id="itemsContainer"></div>
+
+
+
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!--Screen 9: Sales Input Screen -->
+  {% comment %} <div id="screen9" class=" w-full  hidden  max-w-md p-6">
+    <div class="w-full  max-w-md bg-[#0D4D95] h-[60px] absolute top-0 left-0 ">
+      <img src="{% static 'restaurant/assets/images/svgviewer-png-output.png' %}" alt="Pepsi Logo"
+        class="absolute object-contain w-32 left-3 top-3" />
+      <img src="{% static 'restaurant/assets/images/Premium.png' %}" alt="Pepsi Logo"
+        class="absolute  object-contain w-10 right-3 top-1" />
+    </div>
+    <img onclick="goToScreen(2)" src="{% static 'restaurant/assets/images/back-button.png' %}" alt="backbtn"
+      class="absolute top-16 left-2  object-contain w-12 h-12">
+
+
+    <div class="mt-28">
+      <p class="text-2xl text-white font-medium text-start my-2">Enter Sales of Case</p>
+
+
+      <input inputmode="numeric" pattern="[0-9]*" type="number" id="crateNumInput" placeholder="ENTER NUMBER"
+        class="w-full border-2 border-[#C6A75F] text-xl  font-semibold placeholder-white text-white p-3 rounded-[5px] mb-4 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#C6A75F] no-spinner" />
+      <button id="crateBtn"
+        class="bg-[#C6A75F] font-bold rounded-xs text-xl text-white w-full py-3 shadow-md  rounded-[5px] border-2 border-[#C6A75F] hover:bg-black hover:text-[#C6A75F] transition">
+        Proceed
+      </button>
+
+
+    </div>
+
+
+  </div> {% endcomment %}
+
+
+
+
+  <!-- Loader Screen -->
+
+
+  <div id="loaderScreen" class="hidden w-full max-w-md  flex items-center justify-center text-center p-6">
+    <div class="loader spinner">
+    </div>
+  </div>
+
+
+
+  <!-- Capturing Image -->
+  <canvas id="snapshotCanvas" class="hidden"></canvas>
+  <canvas id="snapshotCanvas2" class="hidden"></canvas>
+
+  <!-- Custom Alert -->
+
+  <div id="customAlert" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden">
+    <div class="bg-white text-black rounded-[5px] shadow-lg p-6 w-[90%] max-w-md text-center animate-slideToCenter">
+      <p id="alertMessage" class="text-xl text-start font-medium mb-4"></p>
+      <button onclick="closeAlert()"
+        class="bg-gradient-to-r from-[#a3894d] to-[#d6bb7a] text-white font-medium w-fit py-2 px-5 rounded-md shadow-md hover:brightness-110 transition">
+        OK
+      </button>
+    </div>
+  </div>
+
+
+
+  {% if show_weekly_popup %}
+  <script>
+    setTimeout(function () {
+
+      Swal.fire({
+        icon: "info",
+        html: `
+    <p class="text-left">
+      {% for msg in missing_messages_en %}
+        {{ msg|safe }} <br>
+        {% endfor %}
+    </p>
+    <br><br>
+    <p class="text-right" dir="rtl">
+      {% for msg in missing_messages_ur %}
+        {{ msg|safe }} <br>
+      {% endfor %}
+      </p>
+    `,
+        focusConfirm: false,
+        confirmButtonText: `<i class="fa fa-thumbs-up"></i> OK`,
+
+        iconColor: "#C6A75F",
+        customClass: {
+          confirmButton: "swal-gradient-btn",
+          htmlContainer: "swal-scroll"
+        },
+      });
+    }, 1000);
+  </script>
+  {% endif %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script src="{% static 'restaurant/js/customer.js' %}"></script>
+</body>
+
+</html>
